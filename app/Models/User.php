@@ -45,6 +45,7 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $template = \App\Models\Template::findOrFail(1);
+        
         $body = strval($template->body);
         $body = str_replace('[user-name]', !empty($this->name) ? $this->name : "", $body);        
         $this->notify(new ResetPasswordNotification($token,$body,$template->subject));
