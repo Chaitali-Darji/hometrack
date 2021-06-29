@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories\User;
+namespace App\Repositories\Role;
 
-use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;  
 
-class UserRepository
+class RoleRepository
 {
-    public function __construct(User $model)
+    public function __construct(Role $model)
     {
         $this->model = $model;
     }
@@ -36,18 +36,18 @@ class UserRepository
     */
     public function find($id): ?Model
     {
-        return $this->model->withTrashed()->find($id);
+        return $this->model->find($id);
     }
 
     /**
-    * @param user request data
+    * @param role request data
     * @return boolean
     */
-    public function update($id, $userRequest)
+    public function update($id, $roleRequest)
     {
-        $user = $this->model->withTrashed()->find($id);
-        $user->roles()->sync($userRequest->roles); 
-        return $user->update($userRequest->user);
+        $role = $this->model->withTrashed()->find($id);
+        $role->modules()->sync($roleRequest->permissions); 
+        return $role->update($roleRequest->role);
     }
 
     /**

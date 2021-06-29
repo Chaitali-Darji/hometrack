@@ -18,9 +18,6 @@ Route::get('/', function() {
     return view('auth.login');
 })->name('index');
 
-Route::get('/register', function() {
-    return view('auth.registration');
-})->name('register');
 
 Route::get('/forgot-password', function() {
     return view('auth.forgotPassword');
@@ -28,9 +25,9 @@ Route::get('/forgot-password', function() {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::prefix('')
+Route::prefix('admin')
     ->group(base_path('routes/admin.php'));

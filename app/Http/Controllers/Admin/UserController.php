@@ -10,15 +10,20 @@ use App\Models\User;
 use App\Models\Role;
 use App\Http\Requests\Admin\UserRequest;
 use Redirect;
-use App\Repositories\User\UserRepositoryInterface;
+use Session;
+use App\Repositories\User\UserRepository;
 
 class UserController extends BaseController {
 
     private $userRepository;
+    private $role;
+    private $user;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepository $userRepository, Role $role, User $user)
    {
        $this->userRepository = $userRepository;
+       $this->role = $role;
+       $this->user = $user;
    }
 
     /**
@@ -29,7 +34,7 @@ class UserController extends BaseController {
     public function index()
     {
         $users = $this->userRepository->all();
-        $roles = Role::pluck('name', 'id');
+        $roles = $this->role->pluck('name', 'id');
         return view('admin.users.index', compact('users','roles'));
     }
 
@@ -40,7 +45,7 @@ class UserController extends BaseController {
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'id');
+        $roles = $this->role->pluck('name', 'id');
         return view('admin.users.add-edit', compact('roles'));
     }
 
@@ -53,19 +58,8 @@ class UserController extends BaseController {
     {
         $user = $this->userRepository->create($userRequest->user);
         $user->roles()->sync($userRequest->roles);
+        Session::flash('success', 'User successfully created!');
         return Redirect::route('users.index');
-    }
-
-    /**
-     * Display the user.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $user = User::withTrashed()->findOrFail($id);
-        return view('admin.users.show', compact('user'));
     }
 
     /**
@@ -77,7 +71,7 @@ class UserController extends BaseController {
     public function edit($id)
     {
         $user = $this->userRepository->find($id);
-        $roles = Role::pluck('name', 'id');
+        $roles = $this->role->pluck('name', 'id');
         return view('admin.users.add-edit', compact('user', 'roles'));
     }
 
@@ -90,8 +84,12 @@ class UserController extends BaseController {
      */
     public function update($id, UserRequest $userRequest)
     {
-        $user = $this->userRepository->find($id);
-        $user->update($userRequest->user);
+        if($this->userRepository->update($id,$userRequest)){
+            Session::flash('success', 'User successfully updated!');
+        }
+        else{
+            Session::flash('error', 'Please try again!');   
+        }
         return redirect()->route('users.index');
     }
 
@@ -103,8 +101,43 @@ class UserController extends BaseController {
      */
     public function destroy($id)
     {
-        $user = $this->userRepository->forceDelete($id);
-       
-        return Redirect::route('users.index');
+        if($this->userRepository->forceDelete($id)){
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User successfully deleted!'
+            ]);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Please try again!'
+        ]);
+    }
+
+
+    public function activeInactive($id){
+
+        if (! $user = $this->user->withTrashed()->find($id)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found!!'
+            ]);
+        }
+
+        if(empty($user->deleted_at)){
+            $user->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User successfully disabled!'
+            ]);
+        }
+        else{
+            $user->restore();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User successfully enabled!'
+            ]);
+        }
     }
 }

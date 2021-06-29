@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use App\Http\Requests\Request;
 use Session;
 
-class UserRequest extends Request
+class RoleRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,17 +26,12 @@ class UserRequest extends Request
     {
         if($this->method == 'POST'){
             return [
-                'user.name' => 'required|max:255',
-                'user.email' => 'required|email|unique:users,email|max:255',
-                'user.password' => 'required|max:255',
+                'role.name' => 'required|max:255',
             ];
         }
         else if (in_array($this->method(), ['PUT', 'PATCH'])) {
-            $user = $this->route()->parameter('user');
             return [
-                'user.name' => 'required|max:255',
-                'user.email' => 'required|email|unique:users,email,'.$this->id.'|max:255',
-                'user.password' => 'nullable|max:255'
+                'role.name' => 'required|max:255',
             ];
         }
 
