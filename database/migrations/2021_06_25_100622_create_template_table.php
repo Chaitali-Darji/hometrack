@@ -20,6 +20,7 @@ class CreateTemplateTable extends Migration
             $table->string('subject');
             $table->text('body');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
