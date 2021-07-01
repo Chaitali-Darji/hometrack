@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ArchiveController;
 use App\Http\Controllers\Admin\SettingController;
 
-Route::middleware('auth')->group(static function () {
+Route::middleware(['auth','roles.auth'])->group(static function () {
 
     //User
     Route::resource('users', UserController::class);

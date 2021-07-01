@@ -81,7 +81,7 @@
                 </div>
                 <div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
                   @include('admin.partials._session-message')
-                  @include('admin.archive.list')                  
+                  @include('admin.users.archive-list')                  
                 </div>
               </div>
             </div>
