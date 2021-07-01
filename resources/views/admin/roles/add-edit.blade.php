@@ -14,18 +14,14 @@
                       <h4 class="card-title">Role Add/Edit</h4>
                     </div>
                     <div class="card-body">
-                     @if( Session::has( 'success' ))
-                         {{ Session::get( 'success' ) }}
-                    @elseif( Session::has( 'error' ))
-                         {{ Session::get( 'error' ) }}
-                    @endif
+                     @include('admin.partials._session-message')
 
                       @if(isset($role))
-                         {!! Form::model($role, array('route' => array('roles.update', $role->id))) !!}
+                         {!! Form::model($role, array('route' => array('roles.update', $role->id),'id' => 'jquery-role-form')) !!}
                          {{ method_field('PATCH') }}
                          <input type="hidden" value="{{$role->id}}" name="id">
                       @else
-                        {!! Form::open(array('route' => 'roles.store', 'autocomplete' => 'off')) !!}
+                        {!! Form::open(array('route' => 'roles.store', 'autocomplete' => 'off','id' => 'jquery-role-form')) !!}
                       @endif    
                           <div class="row">
                             <div class="col-md-6">
@@ -72,5 +68,5 @@
 @endsection
 
 @section('page-script')
-    <script src="{{asset('admin/js/scripts/pages/roles/list.js')}}"></script>
+    <script src="{{asset('admin/js/scripts/pages/roles/add-edit.js')}}"></script>
 @endsection

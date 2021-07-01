@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories\User;
+namespace App\Repositories\Setting;
 
-use App\Models\User;
+use App\Models\Setting;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;  
 
-class UserRepository
+class SettingRepository
 {
-    public function __construct(User $model)
+    public function __construct(Setting $model)
     {
         $this->model = $model;
     }
@@ -40,7 +40,7 @@ class UserRepository
     }
 
     /**
-    * @param user array
+    * @param array
     * @return boolean
     */
     public function update($id, array $attributes)
@@ -49,14 +49,12 @@ class UserRepository
     }
 
     /**
-    * @param user request data
+    * @param role request data
     * @return boolean
     */
-    public function updateUser($id, $userRequest)
+    public function updateSetting($where, $data)
     {
-        $user = $this->model->find($id);
-        $user->roles()->sync($userRequest->roles); 
-        return $user->update($userRequest->user);
+        return $this->model->where($where)->update($data);
     }
 
     /**
@@ -65,14 +63,6 @@ class UserRepository
     */
     public function delete($id)
     {
-        return $this->model->where('id',$id)->delete();    
-    }
-
-    /**
-    * @return Collection
-    */
-    public function trashAll(): Collection
-    {
-       return $this->model->onlyTrashed()->get();    
+        return $this->model->delete();    
     }
 }

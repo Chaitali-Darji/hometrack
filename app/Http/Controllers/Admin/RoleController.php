@@ -17,6 +17,7 @@ class RoleController extends BaseController {
 
     private $roleRepository;
     private $module;
+    private $role;
 
     public function __construct(RoleRepository $roleRepository, Role $role, Module $module)
    {
@@ -33,7 +34,9 @@ class RoleController extends BaseController {
     public function index()
     {
         $roles = $this->roleRepository->all();
-        return view('admin.roles.index', compact('roles'));
+        $modules = $this->module->pluck('name', 'id');
+        $archive_data = $this->roleRepository->trashAll();
+        return view('admin.roles.index', compact('roles','modules','archive_data'));
     }
 
     /**
@@ -56,7 +59,7 @@ class RoleController extends BaseController {
     {
         $role = $this->roleRepository->create($roleRequest->role);
         $role->modules()->sync($roleRequest->permissions);
-        Session::flash('success', 'Role successfully created!');
+        Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module'=>'Role']));
         return Redirect::route('roles.index');
     }
 
@@ -82,11 +85,11 @@ class RoleController extends BaseController {
      */
     public function update($id, RoleRequest $roleRequest)
     {
-        if($this->roleRepository->update($id,$roleRequest)){
-            Session::flash('success', 'Role successfully updated!');
+        if($this->roleRepository->updateRole($id,$roleRequest)){
+            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'Role']));
         }
         else{
-            Session::flash('error', 'Please try again!');   
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
         }
         return redirect()->route('roles.index');
     }
@@ -99,42 +102,42 @@ class RoleController extends BaseController {
      */
     public function destroy($id)
     {
-        if($this->roleRepository->forceDelete($id)){
+        if($this->roleRepository->delete($id)){
             return response()->json([
-                'status' => 'success',
-                'message' => 'Role successfully deleted!'
+                'status' => config('constants.SUCCESS_STATUS'),
+                'message' => trans('response.delete',['module'=>'Role'])
             ]);
         }
         return response()->json([
-            'status' => 'error',
-            'message' => 'Please try again!'
+            'status' => config('constants.ERROR_STATUS'),
+            'message' => trans('response.try_again')
         ]);
     }
 
 
     public function activeInactive($id){
 
-        if (! $role = $this->role->withTrashed()->find($id)) {
+        if (! $role = $this->roleRepository->find($id)) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Role not found!!'
+                'status' => config('constants.ERROR_STATUS'),
+                'message' => trans('response.not_found',['module'=>'Role'])
             ]);
         }
 
-        if(empty($role->deleted_at)){
-            $role->delete();
+        if($role->is_active){
+            $this->roleRepository->update($id,['is_active' => 0]);
 
             return response()->json([
-                'status' => 'success',
-                'message' => 'Role successfully disabled!'
+                'status' => config('constants.SUCCESS_STATUS'),
+                'message' => trans('response.disabled',['module'=>'Role'])
             ]);
         }
         else{
-            $role->restore();
+            $this->roleRepository->update($id,['is_active' => 1]);
 
             return response()->json([
-                'status' => 'success',
-                'message' => 'Rser successfully enabled!'
+                'status' => config('constants.SUCCESS_STATUS'),
+                'message' => trans('response.enabled',['module'=>'Role'])
             ]);
         }
     }

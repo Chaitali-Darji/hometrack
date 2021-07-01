@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        config()->set('settings', \App\Models\Setting::pluck('value', 'key')->all());
     }
 }

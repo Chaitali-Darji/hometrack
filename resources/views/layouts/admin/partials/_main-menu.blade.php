@@ -107,6 +107,7 @@
 
         <li class=" nav-item"><a href="#"><i class="bx bxs-wrench"></i><span class="menu-title text-truncate" data-i18n="Settings">Settings</span></a>
           <ul class="menu-content">
+            <li><a class="d-flex align-items-center" href="{{route('settings.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="General Settings">General Settings</span></a>
             <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Email Templates">Email Templates</span></a>
             </li>
             <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Appointment Reminder Logs">Appointment Reminder Logs</span></a>

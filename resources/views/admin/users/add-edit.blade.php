@@ -14,11 +14,7 @@
                       <h4 class="card-title">User Add/Edit</h4>
                     </div>
                     <div class="card-body">
-                     @if( Session::has( 'success' ))
-                         {{ Session::get( 'success' ) }}
-                    @elseif( Session::has( 'error' ))
-                         {{ Session::get( 'error' ) }}
-                    @endif
+                     @include('admin.partials._session-message')
 
                       @if(isset($user))
                          {!! Form::model($user, array('route' => array('users.update', $user->id))) !!}

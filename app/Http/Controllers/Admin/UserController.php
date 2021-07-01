@@ -34,8 +34,9 @@ class UserController extends BaseController {
     public function index()
     {
         $users = $this->userRepository->all();
+        $archive_data = $this->userRepository->trashAll();
         $roles = $this->role->pluck('name', 'id');
-        return view('admin.users.index', compact('users','roles'));
+        return view('admin.users.index', compact('users','roles','archive_data'));
     }
 
     /**
@@ -58,7 +59,7 @@ class UserController extends BaseController {
     {
         $user = $this->userRepository->create($userRequest->user);
         $user->roles()->sync($userRequest->roles);
-        Session::flash('success', 'User successfully created!');
+        Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module'=>'User']));
         return Redirect::route('users.index');
     }
 
@@ -84,11 +85,11 @@ class UserController extends BaseController {
      */
     public function update($id, UserRequest $userRequest)
     {
-        if($this->userRepository->update($id,$userRequest)){
-            Session::flash('success', 'User successfully updated!');
+        if($this->userRepository->updateUSer($id,$userRequest)){
+            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'User']));
         }
         else{
-            Session::flash('error', 'Please try again!');   
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));  
         }
         return redirect()->route('users.index');
     }
@@ -101,42 +102,42 @@ class UserController extends BaseController {
      */
     public function destroy($id)
     {
-        if($this->userRepository->forceDelete($id)){
+        if($this->userRepository->delete($id)){
             return response()->json([
-                'status' => 'success',
-                'message' => 'User successfully deleted!'
+                'status' => config('constants.SUCCESS_STATUS'),
+                'message' => trans('response.delete',['module'=>'Role'])
             ]);
         }
         return response()->json([
-            'status' => 'error',
-            'message' => 'Please try again!'
+            'status' => config('constants.ERROR_STATUS'),
+            'message' => trans('response.try_again')
         ]);
     }
 
 
     public function activeInactive($id){
 
-        if (! $user = $this->user->withTrashed()->find($id)) {
+        if (! $user = $this->userRepository->find($id)) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'User not found!!'
+                'status' => config('constants.ERROR_STATUS'),
+                'message' => trans('response.not_found',['module'=>'User'])
             ]);
         }
 
-        if(empty($user->deleted_at)){
-            $user->delete();
+        if($user->is_active){
+            $this->userRepository->update($id,array('is_active' => 0));
 
             return response()->json([
-                'status' => 'success',
-                'message' => 'User successfully disabled!'
+                'status' => config('constants.SUCCESS_STATUS'),
+                'message' => trans('response.disabled',['module'=>'User'])
             ]);
         }
         else{
-            $user->restore();
+            $this->userRepository->update($id,['is_active' => 1]);
 
             return response()->json([
-                'status' => 'success',
-                'message' => 'User successfully enabled!'
+                'status' => config('constants.SUCCESS_STATUS'),
+                'message' => trans('response.enabled',['module'=>'User'])
             ]);
         }
     }

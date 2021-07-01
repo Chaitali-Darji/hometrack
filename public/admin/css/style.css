@@ -1,3 +1,8 @@
 .swal-button--confirm{
 	background-color:  #39da8a !important;
 }
+
+.dataTable > thead > tr > th[class*="sort"]:before,
+.dataTable > thead > tr > th[class*="sort"]:after {
+    content: "" !important;
+}
