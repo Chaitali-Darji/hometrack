@@ -37,22 +37,22 @@ class SettingController extends BaseController {
     public function changeSetting(Request $request){
 
         foreach($request->setting as $key => $setting){
-
-            $setting_info = $this->setting->where('key',$key)->first();
-            if(empty($setting_info)){
-                $this->settingRepository->create([
-                    'key' => $key,
-                    'value' => $setting
-                ]);
-            }
-            else{
-                $this->settingRepository->updateSetting(
-                    [ 'key' => $key ],
-                    [ 'value' => $setting ]
-                );
-            }
+            $this->settingRepository->saveSetting($key,$setting);
         }
 
+        if($request->admin_logo){
+            $imageName = time().'.'.$request->admin_logo->extension();  
+            $request->admin_logo->move(config('constants.SETTING_IMAGE_PATH'), $imageName);
+            $this->settingRepository->saveSetting('admin_logo',$imageName);
+        }
+
+
+        if($request->admin_auth_logo){
+            $imageName = time().'.'.$request->admin_auth_logo->extension();  
+            $request->admin_auth_logo->move(config('constants.SETTING_IMAGE_PATH'), $imageName);
+
+            $this->settingRepository->saveSetting('admin_auth_logo',$imageName);
+        }
         Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'Setting']));
         return redirect()->route('settings.index');
     }

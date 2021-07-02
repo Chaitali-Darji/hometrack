@@ -21,8 +21,6 @@ $(document).ready( function () {
         event.preventDefault();
         restoreData($(this));
     });
-
-    new Dropzone("div.dropzone", { url: "/file/post"});
 });
 
 function datatableDelete($this) {

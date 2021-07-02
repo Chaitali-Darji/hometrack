@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Role;
+use App\Models\EmailTemplate;
 
 class User extends Authenticatable
 {
@@ -71,7 +72,7 @@ class User extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $template = \App\Models\Template::findOrFail(1);
+        $template = EmailTemplate::where('template_type','reset_password')->first();
         
         $body = strval($template->body);
         $body = str_replace('[user-name]', !empty($this->name) ? $this->name : "", $body);        

@@ -19,6 +19,7 @@
 <script src="{{asset('admin/vendors/js/tables/datatable/pdfmake.min.js')}}"></script>
 <script src="{{asset('admin/vendors/js/tables/datatable/vfs_fonts.js')}}"></script>
 <script src="{{asset('admin/vendors/js/file-uploaders/dropzone.min.js')}}"></script>
+<script src="{{asset('admin/vendors/js/ui/prism.min.js')}}"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
@@ -32,5 +33,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <!-- <script src="{{asset('admin/js/scripts/extensions/dropzone.min.js')}}"></script> -->
 
 <script src="{{asset('admin/js/scripts/common.js')}}"></script>

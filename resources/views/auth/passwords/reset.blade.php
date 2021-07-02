@@ -66,7 +66,7 @@
                     </div>
                     <!-- right section image -->
                     <div class="col-md-6 d-md-block d-none text-center align-self-center">
-                    <img class="img-fluid" src="{{asset('admin/images/logo/logo.png')}}" alt="Logo">
+                    <img class="img-fluid" @if(!empty(config('settings.admin_auth_logo'))) src="{{ asset(config('constants.SETTING_IMAGE_URL').config('settings.admin_auth_logo'))}}" @else src="{{asset('admin/images/logo/logo.png')}}" @endif  alt="Logo">
                     </div>
                 </div>
             </div>

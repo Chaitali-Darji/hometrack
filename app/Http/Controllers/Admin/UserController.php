@@ -85,7 +85,7 @@ class UserController extends BaseController {
      */
     public function update($id, UserRequest $userRequest)
     {
-        if($this->userRepository->updateUSer($id,$userRequest)){
+        if($this->userRepository->updateUser($id,$userRequest)){
             Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'User']));
         }
         else{

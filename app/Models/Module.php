@@ -17,6 +17,8 @@ class Module extends Model
      */
     protected $fillable = [
         'name',
+        'controller',
+        'menu_icon',
         'is_active'
     ];
 }

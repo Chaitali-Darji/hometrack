@@ -13,12 +13,15 @@ class CreateTemplateTable extends Migration
      */
     public function up()
     {
-        Schema::create('templates', function (Blueprint $table) {
+        Schema::create('email_templates', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->string('subject');
-            $table->text('body');
+            $table->string('template_type');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
+            $table->string('subject')->nullable();
+            $table->text('body')->nullable();
+            $table->string('from')->nullable();
+            $table->string('bcc')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
@@ -35,6 +38,6 @@ class CreateTemplateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('template');
+        Schema::dropIfExists('email_templates');
     }
 }

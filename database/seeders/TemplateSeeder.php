@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Template;
+use App\Models\EmailTemplate;
 
 class TemplateSeeder extends Seeder
 {
@@ -14,7 +14,8 @@ class TemplateSeeder extends Seeder
      */
     public function run()
     {
-        Template::create(array(
+        EmailTemplate::create(array(
+            'template_type' => 'reset_password',
             'name' => "Reset Password",
             'subject' => 'Reset Password',
             'description' => 'Reset Password for Admin',

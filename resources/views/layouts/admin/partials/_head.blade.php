@@ -20,6 +20,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/core/menu/menu-types/vertical-menu.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/forms/validation/form-validation.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/pages/dashboard-ecommerce.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/ui/prism.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/file-uploaders/dropzone.min.css')}}">
 <!-- END: Page CSS-->
 

@@ -16,7 +16,8 @@ class ModuleSeeder extends Seeder
     {
         Module::create(
             array(
-                'name' => "Billing"
+                'name' => "Billing",
+                'controller' => 'BillingController'
             )
         );
 
@@ -28,7 +29,8 @@ class ModuleSeeder extends Seeder
 
         Module::create(
             array(
-                'name' => "Clients"
+                'name' => "Clients",
+                'controller' => 'ClientController'
             )
         );
 
@@ -58,7 +60,8 @@ class ModuleSeeder extends Seeder
 
         Module::create(
             array(
-                'name' => "Settings"
+                'name' => "Settings",
+                'controller' => 'SettingController'
             )
         );
 
@@ -71,6 +74,21 @@ class ModuleSeeder extends Seeder
         Module::create(
             array(
                 'name' => "Reports"
+            )
+        );
+
+        Module::create(
+            array(
+                'name' => "User",
+                'controller' => 'UserController'
+            )
+        );
+
+
+        Module::create(
+            array(
+                'name' => "Role",
+                'controller' => 'RoleController'
             )
         );
     }

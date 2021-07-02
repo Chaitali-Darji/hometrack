@@ -8,7 +8,7 @@
   <meta name="author" content="Hometrack">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{config('settings.name')}}</title>
+  <title>{{config('settings.name') ?? ''}}</title>
   
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
   @include('layouts.admin.partials._head')

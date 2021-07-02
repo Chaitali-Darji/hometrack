@@ -65,4 +65,19 @@ class SettingRepository
     {
         return $this->model->delete();    
     }
+
+    public function saveSetting($key,$value)
+    {
+        $setting_info = $this->model->where('key',$key)->first();
+        
+        if(empty($setting_info)){
+            return $this->model->create([
+                'key' => $key,
+                'value' => $value
+            ]);
+        }
+        else{
+            return $this->model->where('id',$key)->update(['value' => $value]);
+        }
+    }
 }
