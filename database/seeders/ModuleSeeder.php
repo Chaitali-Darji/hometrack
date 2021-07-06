@@ -91,5 +91,21 @@ class ModuleSeeder extends Seeder
                 'controller' => 'RoleController'
             )
         );
+
+
+         Module::create(
+            array(
+                'name' => "Email Template",
+                'controller' => 'EmailTemplateController'
+            )
+        );
+
+
+          Module::create(
+            array(
+                'name' => "SMS Template",
+                'controller' => 'SMSTemplateController'
+            )
+        );
     }
 }

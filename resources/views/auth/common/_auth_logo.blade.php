@@ -1,0 +1,1 @@
+<img class="img-fluid" src="{{ config('settings.admin_auth_logo') ? asset(config('constants.SETTING_IMAGE_URL').config('settings.admin_auth_logo')) :  asset('admin/images/logo/logo.png')}}" alt="avatar" alt="Logo">

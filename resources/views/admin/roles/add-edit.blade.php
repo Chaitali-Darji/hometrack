@@ -19,7 +19,7 @@
                       @if(isset($role))
                          {!! Form::model($role, array('route' => array('roles.update', $role->id),'id' => 'jquery-role-form')) !!}
                          {{ method_field('PATCH') }}
-                         <input type="hidden" value="{{$role->id}}" name="id">
+                         {!! Form::hidden('id', isset($client) ? $role->id : null) !!}
                       @else
                         {!! Form::open(array('route' => 'roles.store', 'autocomplete' => 'off','id' => 'jquery-role-form')) !!}
                       @endif    
@@ -42,7 +42,7 @@
                               @foreach($modules as $key => $module)
                                 <fieldset class="form-group">
                                   <div class="checkbox">
-                                    <input type="checkbox" class="checkbox-input" id="checkbox{{$key}}" name="permissions[]" value="{{$key}}" @if (isset($role) && array_search($key, array_column($role->modules->toArray(), 'id')) !== FALSE) checked @endif/>
+                                    {!! Form::checkbox('permissions[]', $key, (isset($role) && array_search($key, array_column($role->modules->toArray(), 'id')) !== FALSE) ? true : false, array('class' => 'checkbox-input', 'id' => 'checkbox'.$key)) !!}
                                     <label for="checkbox{{$key}}">{{$module}}</label>
                                   </div>
                                 </fieldset>

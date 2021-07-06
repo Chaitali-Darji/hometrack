@@ -31,8 +31,9 @@
 <script src="{{asset('admin/js/scripts/customizer.min.js')}}"></script>
 <!-- END: Theme JS-->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
- <!-- <script src="{{asset('admin/js/scripts/extensions/dropzone.min.js')}}"></script> -->
+<script src="{{asset('admin/js/scripts/toastr.min.js')}}"></script>
+<script src="{{asset('admin/js/scripts/sweetalert.min.js')}}"></script>
+<script src="{{asset('admin/js/scripts/bootstrap-tagsinput.min.js')}}"></script>
+<script src="{{asset('admin/js/scripts/embed.js')}}"></script>
 
 <script src="{{asset('admin/js/scripts/common.js')}}"></script>

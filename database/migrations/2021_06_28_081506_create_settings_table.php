@@ -21,8 +21,6 @@ class CreateSettingsTable extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

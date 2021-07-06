@@ -24,8 +24,9 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/file-uploaders/dropzone.min.css')}}">
 <!-- END: Page CSS-->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<link rel="stylesheet" href="{{asset('admin/css/toastr.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/pages/app-users.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-tagsinput.css')}}">
 
 <!-- BEGIN: Custom CSS-->
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/style.css')}}">

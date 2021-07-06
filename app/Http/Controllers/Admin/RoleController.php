@@ -57,7 +57,10 @@ class RoleController extends BaseController {
      */
     public function store(RoleRequest $roleRequest)
     {
-        $role = $this->roleRepository->create($roleRequest->role);
+        if(!$role = $this->roleRepository->create($roleRequest->role)){
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));
+            return redirect()->route('roles.index');
+        }
         $role->modules()->sync($roleRequest->permissions);
         Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module'=>'Role']));
         return Redirect::route('roles.index');
@@ -71,7 +74,10 @@ class RoleController extends BaseController {
      */
     public function edit($id)
     {
-        $role = $this->roleRepository->find($id);
+        if(!$role = $this->roleRepository->find($id)){
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module'=>'Role']));
+            return redirect()->route('roles.index');
+        }
         $modules = $this->module->pluck('name', 'id');
         return view('admin.roles.add-edit', compact('role','modules'));
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserRolesTable extends Migration
+class CreateSmsTemplateTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateUserRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_roles', function (Blueprint $table) {
+        Schema::create('sms_template', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('role_id');
+            $table->string('template_type');
+            $table->longText('body')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,11 +31,6 @@ class CreateUserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::table('user_roles', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropForeign(['role_id']);
-
-        });
-        Schema::dropIfExists('user_roles');
+        Schema::dropIfExists('sms_template');
     }
 }

@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\ArchiveController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\EmailTemplateController;
-
+use App\Http\Controllers\Admin\SMSTemplateController;   
 
 Route::middleware(['auth','roles.auth'])->group(static function () {
 
@@ -32,4 +32,10 @@ Route::middleware(['auth','roles.auth'])->group(static function () {
 
     //Email Template
     Route::resource('email-templates', EmailTemplateController::class);
+
+    //SMS Template
+    Route::resource('sms-templates', SMSTemplateController::class);
+    Route::POST('/sms-templates/change-sms-template', [SMSTemplateController::class, 'changeSmsTemplate'])->name('admin.sms-templates.change-sms-template');
+    Route::POST('/sms-templates/change-appointment-reminder', [SMSTemplateController::class, 'changeAppointmentReminder'])->name('admin.sms-templates.change-appointment-reminder');
+    Route::POST('/sms-templates/send-test', [SMSTemplateController::class, 'sendTestSMS'])->name('admin.sms-templates.send-test');
 });

@@ -10,9 +10,14 @@
         <section id="basic-tabs-components">
           <div class="card">
             <div class="card-header">
-              <div class="card-title">
-                <h4>Users</h4>
-                <a href="{{route('users.create')}}" class="btn btn-primary pull-right">Add</a>
+
+              <div class="card-title w100">
+                <div class="row">
+                  <div class="col-md-6">
+                        <h4 class="card-title">Users</h4>
+                  </div>
+                  <div class="col-md-6"><a href="{{route('users.create')}}" class="btn btn-primary pull-right">Add</a></div>
+                </div>
               </div>
             </div>
             <div class="card-body">

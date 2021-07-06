@@ -10,10 +10,15 @@
         <section id="basic-tabs-components">
           <div class="card">
             <div class="card-header">
-              <div class="card-title">
-                <h4>Clients</h4>
-                <a href="{{route('clients.create')}}" class="btn btn-primary pull-right">Add</a>
+              <div class="card-title w100">
+                <div class="row">
+                  <div class="col-md-6">
+                        <h4 class="card-title">Clients</h4>
+                  </div>
+                  <div class="col-md-6"><a href="{{route('clients.create')}}" class="btn btn-primary pull-right">Add</a></div>
+                </div>
               </div>
+
             </div>
             <div class="card-body">
               <ul class="nav nav-tabs" role="tablist">
@@ -45,9 +50,6 @@
                             <th>Email</th>
                             <th>Special Pricing</th>
                             <th>Mobile</th>
-                            <th>Billing Total</th>
-                            <th>Rank</th>
-                            <th>Days since last purchase</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -60,10 +62,7 @@
                               <td class="text-bold-500">{{ $client->brokerage }}</td>
                               <td class="text-bold-500">{{ $client->email }}</td>
                               <td class="text-bold-500"></td>
-                              <td class="text-bold-500">{{ $client->mobile }}</td>
-                              <td class="text-bold-500"></td>
-                              <td class="text-bold-500"></td>
-                              <td class="text-bold-500"></td>
+                              <td class="text-bold-500">{{ $client->mobile_phone }}</td>
                               <td>
                                   <a href="{{route('clients.edit',$client->id)}}">
                                       <i class="bx bx-edit-alt mr-1"></i>

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Repositories\Setting;
+namespace App\Repositories\SMSTemplate;
 
-use App\Models\Setting;
+use App\Models\SMSTemplate;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;  
 
-class SettingRepository
+class SMSTemplateRepository
 {
-    public function __construct(Setting $model)
+    public function __construct(SMSTemplate $model)
     {
         $this->model = $model;
     }
@@ -49,12 +49,12 @@ class SettingRepository
     }
 
     /**
-    * @param role request data
+    * @param request data
     * @return boolean
     */
-    public function updateSetting($where, $data)
+    public function updateSMSTemplate($id, $requestData)
     {
-        return $this->model->where($where)->update($data);
+        return $this->model->where('id',$id)->update($requestData);
     }
 
     /**
@@ -63,21 +63,14 @@ class SettingRepository
     */
     public function delete($id)
     {
-        return $this->model->delete();    
+        return $this->model->where('id',$id)->delete();    
     }
 
-    public function saveSetting($key,$value)
+    /**
+    * @return Collection
+    */
+    public function trashAll(): Collection
     {
-        $setting_info = $this->model->where('key',$key)->first();
-        
-        if(empty($setting_info)){
-            return $this->model->create([
-                'key' => $key,
-                'value' => $value
-            ]);
-        }
-        else{
-            return $this->model->where('key',$key)->update(['value' => $value]);
-        }
+       return $this->model->onlyTrashed()->get();    
     }
 }

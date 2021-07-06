@@ -26,9 +26,16 @@ class ClientRequest extends Request
     {
         if($this->method == 'POST'){
             return [
-                'client.name' => 'required|max:255',
+                'client.first_name' => 'required|max:255',
+                'client.last_name' => 'required|max:255',
                 'client.email' => 'required|email|unique:clients,email|max:255',
-                'client.password' => 'required|max:255',
+                'client.brokerage' => 'required|max:255',
+                'client.mrisid' => 'required|max:255',
+                'client.mobile_phone' => 'required|max:255',
+                'client.office_phone' => 'required|max:255',
+                'client.team_emails' => 'required|max:255',
+                'client.website' => 'required|max:255',
+                'client.notes' => 'required|max:10000',
             ];
         }
         return [];

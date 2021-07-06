@@ -18,8 +18,9 @@
 
                          {!! Form::model($email_template, array('route' => array('email-templates.update', $email_template->id),'id' => 'jquery-email_template-form')) !!}
                          {{ method_field('PATCH') }}
-                         <input type="hidden" value="{{$email_template->id}}" name="id">
-                     
+
+                          {!! Form::hidden('id', isset($email_template) ? $email_template->id : null) !!}
+
                           <div class="row">
                             <div class="col-md-6">
                               <fieldset class="form-group">
@@ -56,7 +57,7 @@
 
                               <fieldset class="form-group">
                                 {!! Form::label('from', 'From:') !!}
-                                {!! Form::text('email_template[from]', isset($email_template) ? $email_template->from : null, array('class' => 'form-control')) !!}
+                                {!! Form::select('email_template[from]', $users,isset($email_template) ? $email_template->from : null, array('class' => 'form-control')) !!}
                                  @error('email_template[from]')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -67,7 +68,7 @@
 
                               <fieldset class="form-group">
                                 {!! Form::label('bcc', 'BCC:') !!}
-                                {!! Form::text('email_template[bcc]', isset($email_template) ? $email_template->bcc : null, array('class' => 'form-control')) !!}
+                                {!! Form::select('email_template[bcc]', $users,isset($email_template) ? $email_template->bcc : null, array('class' => 'form-control')) !!}
                                  @error('email_template[bcc]')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -75,6 +76,14 @@
                                   @enderror
                               </fieldset>                                                    
 
+                            </div>
+
+                            <div class="col-md-6">
+                              <fieldset class="form-group">
+                                {!! Form::label('Tags', 'Tags:') !!}
+                                <p>You can use the following tags in the subject and body of your template and they will automatically be populated with the proper values when your email is sent:</p>
+                                <p>[user-name]</br>[reset-password-link]</p>
+                              </fieldset>
                             </div>
                           </div>
 

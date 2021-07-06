@@ -144,7 +144,7 @@ function generateDatatable($this){
         responsive: !0,
         columnDefs: [ {
             orderable: !1,
-            targets: [ 3 ]
+            targets: [ 1 ]
         } ]
     });
 }

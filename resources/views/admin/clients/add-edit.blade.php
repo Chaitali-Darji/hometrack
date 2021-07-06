@@ -19,7 +19,7 @@
                       @if(isset($client))
                          {!! Form::model($client, array('route' => array('clients.update', $client->id))) !!}
                          {{ method_field('PATCH') }}
-                         <input type="hidden" value="{{$client->id}}" name="id">
+                         {!! Form::hidden('id', isset($client) ? $client->id : null) !!}
                       @else
                         {!! Form::open(array('route' => 'clients.store', 'autocomplete' => 'off', 'id' => 'jquery-client-form')) !!}
                       @endif    
@@ -148,8 +148,5 @@
 @endsection
 
 @section('page-script')
-    <script src="{{asset('admin/js/scripts/pages/users/add-edit.js')}}"></script>
-    <script type="text/javascript">
-        $("#team-email-tag").tagsinput()
-    </script>
+    <script src="{{asset('admin/js/scripts/pages/clients/add-edit.js')}}"></script>
 @endsection

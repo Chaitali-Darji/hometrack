@@ -13,7 +13,8 @@
         "laravel/scout": "^9.1",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-        "laravelcollective/html": "^6.2"
+        "laravelcollective/html": "^6.2",
+        "twilio/sdk": "^6.26"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

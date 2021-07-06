@@ -19,15 +19,14 @@ class CreateTemplateTable extends Migration
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->string('subject')->nullable();
-            $table->text('body')->nullable();
+            $table->longText('body')->nullable();
+            $table->longText('body_json')->nullable();
             $table->string('from')->nullable();
             $table->string('bcc')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

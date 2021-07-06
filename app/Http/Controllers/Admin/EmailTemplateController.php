@@ -7,6 +7,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\EmailTemplate;
+use App\Models\User;
 use App\Http\Requests\Admin\EmailTemplateRequest;
 use Redirect;
 use Session;
@@ -16,11 +17,13 @@ class EmailTemplateController extends BaseController {
 
     private $emailTemplateRepository;
     private $emailTemplate;
+    private $user;
 
-    public function __construct(EmailTemplateRepository $emailTemplateRepository, EmailTemplate $emailTemplate)
+    public function __construct(EmailTemplateRepository $emailTemplateRepository, EmailTemplate $emailTemplate, User $user)
    {
        $this->emailTemplateRepository = $emailTemplateRepository;
        $this->emailTemplate = $emailTemplate;
+       $this->user = $user;
    }
 
     /**
@@ -42,8 +45,12 @@ class EmailTemplateController extends BaseController {
      */
     public function edit($id)
     {
-        $email_template = $this->emailTemplateRepository->find($id);
-        return view('admin.email-templates.add-edit', compact('email_template'));
+        $users = $this->user->orderBy('name')->pluck('email','id')->toArray();
+        if(!$email_template = $this->emailTemplateRepository->find($id)){
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => 'Email Template'])); 
+            return redirect()->route('email-templates.index');
+        }
+        return view('admin.email-templates.add-edit', compact('email_template','users'));
     }
 
     /**

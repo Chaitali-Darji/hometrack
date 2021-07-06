@@ -10,4 +10,5 @@ return [
     'try_again' => 'Please try again!',
     'not_found' => ':module not found!',
     'restored' => ':module successfully restored!',
+    'sent' => 'SMS successfully sent'
 ];

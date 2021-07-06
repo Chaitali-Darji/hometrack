@@ -19,7 +19,8 @@
                       @if(isset($user))
                          {!! Form::model($user, array('route' => array('users.update', $user->id))) !!}
                          {{ method_field('PATCH') }}
-                         <input type="hidden" value="{{$user->id}}" name="id">
+                         {!! Form::hidden('id', isset($user) ? $user->id : null) !!}
+
                       @else
                         {!! Form::open(array('route' => 'users.store', 'autocomplete' => 'off', 'id' => 'jquery-user-form')) !!}
                       @endif    
@@ -57,7 +58,7 @@
                               @foreach($roles as $key => $role)
                                 <fieldset class="form-group">
                                   <div class="checkbox">
-                                    <input type="checkbox" class="checkbox-input" id="checkbox{{$key}}" name="roles[]" value="{{$key}}" @if (isset($user) && array_search($key, array_column($user->roles->toArray(), 'id')) !== FALSE) checked @endif />
+                                    {!! Form::checkbox('roles[]', $key, (isset($user) && array_search($key, array_column($user->roles->toArray(), 'id')) !== FALSE) ? true : false, array('class' => 'checkbox-input', 'id' => 'checkbox'.$key)) !!}
                                     <label for="checkbox{{$key}}">{{$role}}</label>
                                   </div>
                                 </fieldset>

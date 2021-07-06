@@ -10,6 +10,7 @@ use App\Repositories\Setting\SettingRepository;
 use App\Models\Setting;
 use Redirect;
 use Session;
+use Illuminate\Support\Str;
 
 class SettingController extends BaseController {
 
@@ -41,14 +42,14 @@ class SettingController extends BaseController {
         }
 
         if($request->admin_logo){
-            $imageName = time().'.'.$request->admin_logo->extension();  
+            $imageName = time().Str::random(5).'.'.$request->admin_logo->extension();  
             $request->admin_logo->move(config('constants.SETTING_IMAGE_PATH'), $imageName);
             $this->settingRepository->saveSetting('admin_logo',$imageName);
         }
 
 
         if($request->admin_auth_logo){
-            $imageName = time().'.'.$request->admin_auth_logo->extension();  
+            $imageName = time().Str::random(5).'.'.$request->admin_auth_logo->extension();  
             $request->admin_auth_logo->move(config('constants.SETTING_IMAGE_PATH'), $imageName);
 
             $this->settingRepository->saveSetting('admin_auth_logo',$imageName);

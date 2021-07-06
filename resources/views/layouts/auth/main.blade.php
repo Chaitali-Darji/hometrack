@@ -8,8 +8,6 @@
   <meta name="author" content="Hometrack">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>{!! App::environment() != 'production' ? App::environment().' -- ' : '' !!}Hometrack</title>
-  <!-- <link rel="apple-touch-icon" href="{{asset('admin/images/ico/apple-icon-120.html')}}">
-  <link rel="shortcut icon" type="image/x-icon" href="{{asset('admin/images/ico/favicon.ico')}}"> -->
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
   @include('layouts.auth.partials._head')
   </head>

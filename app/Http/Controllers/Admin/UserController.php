@@ -71,7 +71,10 @@ class UserController extends BaseController {
      */
     public function edit($id)
     {
-        $user = $this->userRepository->find($id);
+        if(!$user = $this->userRepository->find($id)){
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module'=>'User']));
+            return redirect()->route('users.index');
+        }
         $roles = $this->role->pluck('name', 'id');
         return view('admin.users.add-edit', compact('user', 'roles'));
     }
@@ -105,7 +108,7 @@ class UserController extends BaseController {
         if($this->userRepository->delete($id)){
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.delete',['module'=>'Role'])
+                'message' => trans('response.delete',['module'=>'User'])
             ]);
         }
         return response()->json([

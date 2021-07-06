@@ -27,11 +27,13 @@ class EmailTemplateRequest extends Request
         if($this->method == 'POST'){
             return [
                 'email_template.name' => 'required|max:255',
+                'email_template.body' => 'required',
             ];
         }
         else if (in_array($this->method(), ['PUT', 'PATCH'])) {
             return [
                 'email_template.name' => 'required|max:255',
+                'email_template.body' => 'required',
             ];
         }
 

@@ -24,7 +24,7 @@ class ClientController extends BaseController {
    }
 
     /**
-     * Display a listing of users
+     * Display a listing of clients
      *
      * @return Response
      */
@@ -36,7 +36,7 @@ class ClientController extends BaseController {
     }
 
     /**
-     * Show the form for creating a new user
+     * Show the form for creating a new client
      *
      * @return Response
      */
@@ -46,7 +46,7 @@ class ClientController extends BaseController {
     }
 
     /**
-     * Store a newly created user in storage.
+     * Store a newly created client in storage.
      *
      * @return Response
      */
@@ -58,19 +58,22 @@ class ClientController extends BaseController {
     }
 
     /**
-     * Show the form for editing the user.
+     * Show the form for editing the client.
      *
      * @param  int  $id
      * @return Response
      */
     public function edit($id)
     {
-        $client = $this->clientRepository->find($id);
+        if(!$client = $this->clientRepository->find($id)){
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => 'Client'])); 
+            return redirect()->route('clients.index');
+        }
         return view('admin.clients.add-edit', compact('client'));
     }
 
     /**
-     * Update the user resource in storage.
+     * Update the client resource in storage.
      *
      * @param  int $id
      * @param Request $request
@@ -110,19 +113,19 @@ class ClientController extends BaseController {
 
     public function activeInactive($id){
 
-        if (! $user = $this->clientRepository->find($id)) {
+        if (! $client = $this->clientRepository->find($id)) {
             return response()->json([
                 'status' => config('constants.ERROR_STATUS'),
-                'message' => trans('response.not_found',['module'=>'User'])
+                'message' => trans('response.not_found',['module'=>'Client'])
             ]);
         }
 
-        if($user->is_active){
+        if($client->is_active){
             $this->clientRepository->update($id,array('is_active' => 0));
 
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.disabled',['module'=>'User'])
+                'message' => trans('response.disabled',['module'=>'Client'])
             ]);
         }
         else{
@@ -130,7 +133,7 @@ class ClientController extends BaseController {
 
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.enabled',['module'=>'User'])
+                'message' => trans('response.enabled',['module'=>'Client'])
             ]);
         }
     }

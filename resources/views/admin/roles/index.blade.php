@@ -10,9 +10,14 @@
         <section id="basic-tabs-components">
           <div class="card">
             <div class="card-header">
-              <div class="card-title">
-                <h4 class="card-title">Role</h4>
-                <a href="{{route('roles.create')}}" class="btn btn-primary mr-1 mb-1">Add</a>
+
+              <div class="card-title w100">
+                <div class="row">
+                  <div class="col-md-6">
+                        <h4 class="card-title">Roles</h4>
+                  </div>
+                  <div class="col-md-6"><a href="{{route('roles.create')}}" class="btn btn-primary pull-right">Add</a></div>
+                </div>
               </div>
             </div>
             <div class="card-body">

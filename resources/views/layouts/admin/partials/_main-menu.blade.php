@@ -4,9 +4,8 @@
         <li class="nav-item mr-auto">
           <a class="navbar-brand" href="{{route('dashboard')}}">
             <div class="brand-logo">
-              <img class="logo" @if(!empty(config('settings.admin_logo'))) src="{{ asset(config('constants.SETTING_IMAGE_URL').config('settings.admin_logo'))}}" @else src="{{ asset('admin/images/logo/hometrack_admin_logo.png')}}" @endif alt="avatar" height="26" width="185">
+              <img class="logo" src="{{ config('settings.admin_logo') ? asset(config('constants.SETTING_IMAGE_URL').config('settings.admin_logo')) : asset('admin/images/logo/hometrack_admin_logo.png')}}" alt="avatar" height="26" width="185">
             </div>
-            <!-- <h2 class="brand-text mb-0">Hometrack</h2> -->
           </a>
         </li>
         <li class="nav-item nav-toggle">
@@ -109,6 +108,7 @@
           <ul class="menu-content">
             <li><a class="d-flex align-items-center" href="{{route('settings.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="General Settings">General Settings</span></a>
             <li><a class="d-flex align-items-center" href="{{route('email-templates.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Email Templates">Email Templates</span></a>
+              <li><a class="d-flex align-items-center" href="{{route('sms-templates.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="SMS Templates">SMS Templates</span></a>
             </li>
             <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Appointment Reminder Logs">Appointment Reminder Logs</span></a>
             </li>
