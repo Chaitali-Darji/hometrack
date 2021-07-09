@@ -12,6 +12,8 @@ class SMSTemplate extends Model
 
     protected $table = "sms_templates";
 
+    const MODULE_NAME = 'SMS Template';
+
     /**
      * The attributes that are mass assignable.
      *

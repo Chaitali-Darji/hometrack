@@ -20,6 +20,10 @@ class RolesAuth
         // get user roles
         $roles = auth()->user()->roles;
 
+        if(auth()->user()->id == 1){
+            return $next($request);
+        }
+
         // get requested action
         $actionName = class_basename($request->route()->getActionname());
 

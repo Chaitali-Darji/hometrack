@@ -10,6 +10,8 @@ class Setting extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const MODULE_NAME = 'Setting';
+
     /**
      * The attributes that are mass assignable.
      *

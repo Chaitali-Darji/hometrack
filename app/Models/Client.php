@@ -11,6 +11,8 @@ class Client extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const MODULE_NAME = 'Client';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -46,4 +48,17 @@ class Client extends Model
         'billing_zip',
         'is_active'
     ];
+
+    public function getParentDisplayAttribute()
+    {
+        return $this->last_name. ' ' .$this->first_name;
+    }
+
+    /**
+     * Get the primary account client associated with the client.
+     */
+    public function primary_account()
+    {
+        return $this->hasOne(Client::class,'id','primary_account_id');
+    }
 }

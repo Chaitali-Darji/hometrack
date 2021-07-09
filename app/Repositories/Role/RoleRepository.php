@@ -30,6 +30,12 @@ class RoleRepository
        return $this->model->create($attributes);   
     }
 
+
+    public function createRole($roleRequest){
+        $role = $this->model->create($roleRequest->role);
+        return $role->modules()->sync($roleRequest->permissions);
+    }
+
      /**
     * @param $id
     * @return Model

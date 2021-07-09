@@ -10,29 +10,32 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="card">
+
                     <div class="card-header">
                       <h4 class="card-title">General Settings</h4>
                     </div>
+                    
                     <div class="card-body">
-                     @include('admin.partials._session-message')
+                        @include('admin.partials._session-message')
 
                         {!! Form::open(array('route' => 'settings.setting-change', 'autocomplete' => 'off','id' => 'jquery-setting-form','files' => true)) !!}
+
                           <div class="row">
                             <div class="col-md-6">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Site Name:') !!}
-                                {!! Form::text('setting[name]', isset($settings['name']) ? $settings['name'] : null, array('class' => 'form-control')) !!}
-                                 @error('setting[name]')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
+                                {!! Form::text('setting[name]', isset($settings['name']) ? $settings['name'] : null, array('class' => 'form-control', 'required' => true)) !!}
+                                 @error('setting.name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                   @enderror
                               </fieldset>
                             </div>
                           </div>
+
                           <div class="row">
                             <div class="col-md-6">
-
                               <fieldset class="form-group">
                                 {!! Form::label('site Admin Logo', 'Site Admin Logo:') !!}
                                 <div class="custom-file">
@@ -60,6 +63,7 @@
                                 </div>
                               </fieldset>
                             </div>
+
                             <div class="col-md-6">
                               <div class="row">
                                 <div class="col-md-6">
@@ -68,21 +72,23 @@
                                 </div>
                               </div>
                           </div>
+                        </div>
+
                           <div class="row">
+                            <div class="col-md-6">
                               {!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}
                               {!! link_to_route('settings.index', 'Cancel', null, array('class' => 'btn')) !!}
+                            </div>
                           </div>
                       {!! Form::close() !!} 
                     </div>
                   </div>
-                </div>
               </div>
             </section>
         </div>
       </div>
     </div>
-
-    <!-- END: Content-->
+<!-- END: Content-->
 @endsection
 
 @section('page-script')

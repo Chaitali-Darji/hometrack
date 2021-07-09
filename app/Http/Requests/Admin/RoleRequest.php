@@ -24,7 +24,7 @@ class RoleRequest extends Request
      */
     public function rules()
     {
-        if($this->method == 'POST'){
+        if($this->method() == 'POST'){
             return [
                 'role.name' => 'required|max:255',
             ];
@@ -47,7 +47,10 @@ class RoleRequest extends Request
     public function withValidator($validator)
     {
         if ($validator->fails()) {
-            Session::flash('error', $validator->messages()->first());
+            return response()->json([
+                'status' => config('constants.ERROR_STATUS'),
+                'message' => trans('response.try_again')
+            ]);
             return redirect()->back()->withInput();
         }
 

@@ -23,13 +23,14 @@
 
                       @else
                         {!! Form::open(array('route' => 'users.store', 'autocomplete' => 'off', 'id' => 'jquery-user-form')) !!}
+                        {{ method_field('POST ') }}
                       @endif    
                           <div class="row">
                             <div class="col-md-6">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Name:') !!}
-                                {!! Form::text('user[name]', isset($user) ? $user->name : null, array('class' => 'form-control')) !!}
-                                 @error('user[name]')
+                                {!! Form::text('user[name]', isset($user) ? $user->name : null, array('class' => 'form-control', 'required' => true)) !!}
+                                 @error('user.name')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -38,8 +39,8 @@
 
                               <fieldset class="form-group">
                                 {!! Form::label('email', 'Email:') !!}<br/>
-                                {!! Form::email('user[email]',  isset($user) ? $user->email : null, array('class' => 'form-control')) !!}
-                                @error('name')
+                                {!! Form::email('user[email]',  isset($user) ? $user->email : null, array('class' => 'form-control', 'required' => true)) !!}
+                                @error('user.email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -48,7 +49,12 @@
 
                               <fieldset class="form-group">
                                 {!! Form::label('password', 'Password:') !!}<br/>
-                                <input type="password" class="form-control" id="password" name="user[password]">
+                                {{ Form::password('user[password]', array('id' => 'password', "class" => "form-control")) }}
+                                @error('user.password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                               </fieldset>
 
                               <fieldset class="form-group">

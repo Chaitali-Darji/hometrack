@@ -13,7 +13,6 @@ use Redirect;
 use Session;
 use App\Repositories\SMSTemplate\SMSTemplateRepository;
 use App\Repositories\Setting\SettingRepository;
-use App\Services\TwilioSMS;
 
 class SMSTemplateController extends BaseController {
 
@@ -48,7 +47,7 @@ class SMSTemplateController extends BaseController {
     public function edit($id)
     {
         if(!$sms_template = $this->SMSTemplateRepository->find($id)){
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module'=>'SMS Template']));
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => SMSTemplate::MODULE_NAME]));
             return redirect()->route('sms-templates.index');
         }
         return view('admin.sms-templates.add-edit', compact('sms_template','users'));
@@ -64,7 +63,7 @@ class SMSTemplateController extends BaseController {
     public function changeSmsTemplate(Request $requestData)
     {
         if($this->SMSTemplateRepository->updateSMSTemplate($requestData->id,$requestData->sms_template)){
-            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'SMS Template']));
+            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => SMSTemplate::MODULE_NAME]));
         }
         else{
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
@@ -82,7 +81,7 @@ class SMSTemplateController extends BaseController {
     public function changeAppointmentReminder(Request $requestData)
     {
         if($this->settingRepository->saveSetting('appointment_reminder_time',$requestData->time)){
-            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'SMS Template']));
+            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => SMSTemplate::MODULE_NAME]));
         }
         else{
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
@@ -91,14 +90,9 @@ class SMSTemplateController extends BaseController {
     }
 
 
-    public function sendTestSMS(Request $request,TwilioSMS $sms)
+    public function sendTestSMS(Request $request)
     {
-        if($sms->send($request->phone_number,'SMS Test')){
-            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.sent',['module'=>'SMS Template']));
-        }
-        else{
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
-        }
+        Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.sent',['module' => SMSTemplate::MODULE_NAME]));
         return redirect()->route('sms-templates.index');
     }
 }

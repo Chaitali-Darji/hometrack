@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\SMSTemplateController;   
+use App\Http\Controllers\Admin\SalesTaxController;
+use App\Http\Controllers\Admin\StateController;   
 
 Route::middleware(['auth','roles.auth'])->group(static function () {
 
@@ -38,4 +40,12 @@ Route::middleware(['auth','roles.auth'])->group(static function () {
     Route::POST('/sms-templates/change-sms-template', [SMSTemplateController::class, 'changeSmsTemplate'])->name('admin.sms-templates.change-sms-template');
     Route::POST('/sms-templates/change-appointment-reminder', [SMSTemplateController::class, 'changeAppointmentReminder'])->name('admin.sms-templates.change-appointment-reminder');
     Route::POST('/sms-templates/send-test', [SMSTemplateController::class, 'sendTestSMS'])->name('admin.sms-templates.send-test');
+
+    //Sales Tax
+    Route::resource('sales-tax', SalesTaxController::class);
+    Route::POST('/sales-tax/active-inactive/{id}', [SalesTaxController::class, 'activeInactive'])->name('admin.sales-tax.active-inactive');
+
+    //State
+    Route::resource('states', StateController::class);
+    Route::POST('/states/active-inactive/{id}', [StateController::class, 'activeInactive'])->name('admin.states.active-inactive');
 });

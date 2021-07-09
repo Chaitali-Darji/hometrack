@@ -25,8 +25,8 @@
                             <div class="col-md-6">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Name:') !!}
-                                {!! Form::text('email_template[name]', isset($email_template) ? $email_template->name : null, array('class' => 'form-control')) !!}
-                                 @error('email_template[name]')
+                                {!! Form::text('email_template[name]', isset($email_template) ? $email_template->name : null, array('class' => 'form-control', 'required' => true)) !!}
+                                 @error('email_template.name')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -35,8 +35,8 @@
 
                               <fieldset class="form-group">
                                 {!! Form::label('description', 'Description:') !!}
-                                {!! Form::text('email_template[description]', isset($email_template) ? $email_template->description : null, array('class' => 'form-control')) !!}
-                                 @error('email_template[description]')
+                                {!! Form::text('email_template[description]', isset($email_template) ? $email_template->description : null, array('class' => 'form-control', 'required' => true)) !!}
+                                 @error('email_template.description')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -46,8 +46,8 @@
 
                               <fieldset class="form-group">
                                 {!! Form::label('subject', 'Subject:') !!}
-                                {!! Form::text('email_template[subject]', isset($email_template) ? $email_template->subject : null, array('class' => 'form-control')) !!}
-                                 @error('email_template[subject]')
+                                {!! Form::text('email_template[subject]', isset($email_template) ? $email_template->subject : null, array('class' => 'form-control', 'required' => true)) !!}
+                                 @error('email_template.subject')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -58,7 +58,7 @@
                               <fieldset class="form-group">
                                 {!! Form::label('from', 'From:') !!}
                                 {!! Form::select('email_template[from]', $users,isset($email_template) ? $email_template->from : null, array('class' => 'form-control')) !!}
-                                 @error('email_template[from]')
+                                 @error('email_template.from')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -69,7 +69,7 @@
                               <fieldset class="form-group">
                                 {!! Form::label('bcc', 'BCC:') !!}
                                 {!! Form::select('email_template[bcc]', $users,isset($email_template) ? $email_template->bcc : null, array('class' => 'form-control')) !!}
-                                 @error('email_template[bcc]')
+                                 @error('email_template.bcc')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -88,19 +88,15 @@
                           </div>
 
                           <div class="row">
-                             <!-- <fieldset class="form-group"> -->
                                 {!! Form::label('body', 'Body:') !!}
                                 {!! Form::hidden('email_template[body]', isset($email_template) ? $email_template->body : null, array('id' => 'email_template_body')) !!}
-                                {!! Form::hidden('email_template[body_json]', isset($email_template) ? $email_template->body_json : null, array('id' => 'email_template_body_json')) !!}
-
+                                {!! Form::hidden('email_template[body_json]', isset($email_template) ? $email_template->body_json : null, array('id' => 'email_template_body_json', 'required' => true)) !!}
                                 <div id="editor-container" style="height: 79vh;"></div>
-
-                                 @error('email_template[body]')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                  @enderror
-                              <!-- </fieldset>    -->
+                                @error('email_template.body')
+                                  <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                  </span>
+                                @enderror
                           </div>
 
                           <div class="row">

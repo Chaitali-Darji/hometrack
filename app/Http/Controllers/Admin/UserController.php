@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\UserRequest;
+use App\Repositories\User\UserRepository;
 use App\Models\User;
 use App\Models\Role;
-use App\Http\Requests\Admin\UserRequest;
+use Carbon\Carbon;
 use Redirect;
 use Session;
-use App\Repositories\User\UserRepository;
 
 class UserController extends BaseController {
 
@@ -57,9 +57,8 @@ class UserController extends BaseController {
      */
     public function store(UserRequest $userRequest)
     {
-        $user = $this->userRepository->create($userRequest->user);
-        $user->roles()->sync($userRequest->roles);
-        Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module'=>'User']));
+        $this->userRepository->createUser($userRequest);        
+        Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module' => User::MODULE_NAME]));
         return Redirect::route('users.index');
     }
 
@@ -72,7 +71,7 @@ class UserController extends BaseController {
     public function edit($id)
     {
         if(!$user = $this->userRepository->find($id)){
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module'=>'User']));
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => User::MODULE_NAME]));
             return redirect()->route('users.index');
         }
         $roles = $this->role->pluck('name', 'id');
@@ -89,7 +88,7 @@ class UserController extends BaseController {
     public function update($id, UserRequest $userRequest)
     {
         if($this->userRepository->updateUser($id,$userRequest)){
-            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'User']));
+            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => User::MODULE_NAME]));
         }
         else{
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));  
@@ -108,7 +107,7 @@ class UserController extends BaseController {
         if($this->userRepository->delete($id)){
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.delete',['module'=>'User'])
+                'message' => trans('response.delete',['module' => User::MODULE_NAME])
             ]);
         }
         return response()->json([
@@ -123,7 +122,7 @@ class UserController extends BaseController {
         if (! $user = $this->userRepository->find($id)) {
             return response()->json([
                 'status' => config('constants.ERROR_STATUS'),
-                'message' => trans('response.not_found',['module'=>'User'])
+                'message' => trans('response.not_found',['module' => User::MODULE_NAME])
             ]);
         }
 
@@ -132,7 +131,7 @@ class UserController extends BaseController {
 
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.disabled',['module'=>'User'])
+                'message' => trans('response.disabled',['module' => User::MODULE_NAME])
             ]);
         }
         else{
@@ -140,7 +139,7 @@ class UserController extends BaseController {
 
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.enabled',['module'=>'User'])
+                'message' => trans('response.enabled',['module' => User::MODULE_NAME])
             ]);
         }
     }

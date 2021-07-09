@@ -24,11 +24,19 @@ class UserRequest extends Request
      */
     public function rules()
     {
-        if($this->method == 'POST'){
+
+        if($this->method() == 'POST'){
             return [
                 'user.name' => 'required|max:255',
                 'user.email' => 'required|email|unique:users,email|max:255',
-                'user.password' => 'required|max:255',
+                'user.password' => [
+                    'required',
+                    'min:8',             
+                    'regex:/[a-z]/',  
+                    'regex:/[A-Z]/',  
+                    'regex:/[0-9]/', 
+                    'regex:/[@$!%*#?&]/'
+                ],
             ];
         }
         else if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -36,7 +44,14 @@ class UserRequest extends Request
             return [
                 'user.name' => 'required|max:255',
                 'user.email' => 'required|email|unique:users,email,'.$this->id.'|max:255',
-                'user.password' => 'nullable|max:255'
+                'user.password' => [
+                    'nullable',
+                    'min:8',             
+                    'regex:/[a-z]/',  
+                    'regex:/[A-Z]/',  
+                    'regex:/[0-9]/', 
+                    'regex:/[@$!%*#?&]/'
+                ],
             ];
         }
 
@@ -52,7 +67,10 @@ class UserRequest extends Request
     public function withValidator($validator)
     {
         if ($validator->fails()) {
-            Session::flash('error', $validator->messages()->first());
+            return response()->json([
+                'status' => config('constants.ERROR_STATUS'),
+                'message' => trans('response.try_again')
+            ]);
             return redirect()->back()->withInput();
         }
 

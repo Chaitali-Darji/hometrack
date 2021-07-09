@@ -27,8 +27,8 @@
                             <div class="col-md-6">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Name:') !!}
-                                {!! Form::text('role[name]', isset($role) ? $role->name : null, array('class' => 'form-control')) !!}
-                                 @error('role[name]')
+                                {!! Form::text('role[name]', isset($role) ? $role->name : null, array('class' => 'form-control', 'required' => true)) !!}
+                                 @error('role.name')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -39,14 +39,18 @@
                                 {!! Form::label('permissions', 'Permissions:') !!}<br/>
                               </fieldset>
 
-                              @foreach($modules as $key => $module)
-                                <fieldset class="form-group">
-                                  <div class="checkbox">
-                                    {!! Form::checkbox('permissions[]', $key, (isset($role) && array_search($key, array_column($role->modules->toArray(), 'id')) !== FALSE) ? true : false, array('class' => 'checkbox-input', 'id' => 'checkbox'.$key)) !!}
-                                    <label for="checkbox{{$key}}">{{$module}}</label>
-                                  </div>
-                                </fieldset>
-                              @endforeach                              
+                              <div class="row">
+                                @foreach($modules as $key => $module)
+                                <div class="col-md-3">
+                                  <fieldset class="form-group">
+                                    <div class="checkbox">
+                                      {!! Form::checkbox('permissions[]', $key, (isset($role) && array_search($key, array_column($role->modules->toArray(), 'id')) !== FALSE) ? true : false, array('class' => 'checkbox-input', 'id' => 'checkbox'.$key)) !!}
+                                      <label for="checkbox{{$key}}">{{$module}}</label>
+                                    </div>
+                                  </fieldset>
+                                </div>
+                                @endforeach                              
+                              </div>
 
                             </div>
                           </div>

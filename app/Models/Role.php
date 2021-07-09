@@ -11,6 +11,8 @@ class Role extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const MODULE_NAME = 'Role';
+
     /**
      * The attributes that are mass assignable.
      *

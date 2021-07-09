@@ -57,12 +57,14 @@ class RoleController extends BaseController {
      */
     public function store(RoleRequest $roleRequest)
     {
-        if(!$role = $this->roleRepository->create($roleRequest->role)){
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));
-            return redirect()->route('roles.index');
+
+        if($this->roleRepository->createRole($roleRequest->role)){
+            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.store',['module' => Role::MODULE_NAME]));
         }
-        $role->modules()->sync($roleRequest->permissions);
-        Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module'=>'Role']));
+        else{
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
+        }
+
         return Redirect::route('roles.index');
     }
 
@@ -75,7 +77,7 @@ class RoleController extends BaseController {
     public function edit($id)
     {
         if(!$role = $this->roleRepository->find($id)){
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module'=>'Role']));
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => Role::MODULE_NAME]));
             return redirect()->route('roles.index');
         }
         $modules = $this->module->pluck('name', 'id');
@@ -92,7 +94,7 @@ class RoleController extends BaseController {
     public function update($id, RoleRequest $roleRequest)
     {
         if($this->roleRepository->updateRole($id,$roleRequest)){
-            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'Role']));
+            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => Role::MODULE_NAME]));
         }
         else{
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
@@ -111,7 +113,7 @@ class RoleController extends BaseController {
         if($this->roleRepository->delete($id)){
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.delete',['module'=>'Role'])
+                'message' => trans('response.delete',['module' => Role::MODULE_NAME])
             ]);
         }
         return response()->json([
@@ -126,7 +128,7 @@ class RoleController extends BaseController {
         if (! $role = $this->roleRepository->find($id)) {
             return response()->json([
                 'status' => config('constants.ERROR_STATUS'),
-                'message' => trans('response.not_found',['module'=>'Role'])
+                'message' => trans('response.not_found',['module' => Role::MODULE_NAME])
             ]);
         }
 
@@ -135,7 +137,7 @@ class RoleController extends BaseController {
 
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.disabled',['module'=>'Role'])
+                'message' => trans('response.disabled',['module' => Role::MODULE_NAME])
             ]);
         }
         else{
@@ -143,7 +145,7 @@ class RoleController extends BaseController {
 
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.enabled',['module'=>'Role'])
+                'message' => trans('response.enabled',['module' => Role::MODULE_NAME])
             ]);
         }
     }

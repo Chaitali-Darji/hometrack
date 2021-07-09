@@ -1,6 +1,5 @@
 $(function () {
   
-  
     unlayer.init({
       id: 'editor-container',
       displayMode: "web"

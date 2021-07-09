@@ -13,7 +13,7 @@ class CreateSmsTemplateTable extends Migration
      */
     public function up()
     {
-        Schema::create('sms_template', function (Blueprint $table) {
+        Schema::create('sms_templates', function (Blueprint $table) {
             $table->id();
             $table->string('template_type');
             $table->longText('body')->nullable();

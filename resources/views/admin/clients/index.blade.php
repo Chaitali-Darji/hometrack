@@ -21,24 +21,38 @@
 
             </div>
             <div class="card-body">
-              <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab"
-                    aria-selected="true">
-                    <span class="align-middle">Active</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile" role="tab"
-                    aria-selected="false">
-                    <span class="align-middle">Archive</span>
-                  </a>
-                </li>
-              </ul>
+              <div class="row">
+                <div class="col-md-9">
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab"
+                        aria-selected="true">
+                        <span class="align-middle">Active</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile" role="tab"
+                        aria-selected="false">
+                        <span class="align-middle">Archive</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-3">
+                  <fieldset class="form-group position-relative has-icon-left">
+                    <form action="" name="dateRangePickerForm" id="dateRangePickerForm">
+                      <input type="hidden" name="reportrangeVal" value="" id="reportrangeVal">
+                     <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                          <i class="fa fa-calendar"></i>&nbsp;
+                          <span></span> <i class="fa fa-caret-down"></i>
+                      </div>
+                    </form>
+                  </fieldset>
+                </div>
+              </div>
               <div class="tab-content">
-                <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
-                  @include('admin.partials._session-message')
-                  
+                @include('admin.partials._session-message')
+                <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">       
                     <div class="table-responsive">
                       <table class="table zero-configuration" id="clients-list-datatable">
                         <thead>
@@ -56,7 +70,7 @@
                         <tbody>
                           @foreach($clients as $client)
                             <tr>
-                              <td class="text-bold-500"></td>
+                              <td class="text-bold-500">{{ ($client->primary_account) ? $client->primary_account->last_name : null}}</td>
                               <td class="text-bold-500">{{ $client->first_name }}</td>
                               <td class="text-bold-500">{{ $client->last_name }}</td>
                               <td class="text-bold-500">{{ $client->brokerage }}</td>
@@ -71,12 +85,6 @@
                                   <a href="{{route('clients.destroy',$client->id)}}" data-clientid="{{$client->id}}" class="delete-confirm">
                                       <i class="bx bx-trash mr-1"></i>
                                   </a>
-
-                                  <div class="custom-control custom-switch custom-switch-success mr-2 mb-1" style="display: inline-block;">
-                                    <input type="checkbox" class="custom-control-input active-client" data-clientid= "{{$client->id}}" id="customSwitchcolor{{$client->id}}" data-url="{{route('admin.clients.active-inactive',$client->id)}}" @if($client->is_active) checked @endif>
-                                    <label class="custom-control-label" for="customSwitchcolor{{$client->id}}" ></label>
-                                  </div>
-
                               </td>
                             </tr>
                           @endforeach   
@@ -85,7 +93,7 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
-                  @include('admin.partials._session-message')       
+                  @include('admin.clients.archive-list')                  
                 </div>
               </div>
             </div>
@@ -98,5 +106,5 @@
 @endsection
 
 @section('page-script')
-    <script src="{{asset('admin/js/scripts/pages/users/list.js')}}"></script>
+    <script src="{{asset('admin/js/scripts/pages/clients/list.js')}}"></script>
 @endsection

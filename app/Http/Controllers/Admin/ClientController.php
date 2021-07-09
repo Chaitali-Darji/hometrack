@@ -5,22 +5,25 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Admin\ClientRequest;
+use App\Repositories\Client\ClientRepository;
 use Illuminate\Http\Request;
 use App\Models\Client;
-use App\Http\Requests\Admin\ClientRequest;
+use App\Models\ClientAddress;
 use Redirect;
 use Session;
-use App\Repositories\Client\ClientRepository;
 
 class ClientController extends BaseController {
 
     private $clientRepository;
     private $client;
+    private $clientAddress;
    
-    public function __construct(ClientRepository $clientRepository, Client $client)
+    public function __construct(ClientRepository $clientRepository, Client $client, ClientAddress $clientAddress)
    {
        $this->clientRepository = $clientRepository;
        $this->client = $client;
+       $this->clientAddress = $clientAddress;
    }
 
     /**
@@ -42,7 +45,7 @@ class ClientController extends BaseController {
      */
     public function create()
     {
-        return view('admin.clients.add-edit');
+        return view('admin.clients.add');
     }
 
     /**
@@ -53,7 +56,8 @@ class ClientController extends BaseController {
     public function store(ClientRequest $clientRequest)
     {
         $client = $this->clientRepository->create($clientRequest->client);
-        Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module'=>'Client']));
+        $this->clientAddress->create($clientRequest->address + ['type' => 'home','client_id' => $client->id]);
+        Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module' => Client::MODULE_NAME]));
         return Redirect::route('clients.index');
     }
 
@@ -69,7 +73,12 @@ class ClientController extends BaseController {
             Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => 'Client'])); 
             return redirect()->route('clients.index');
         }
-        return view('admin.clients.add-edit', compact('client'));
+
+        $clients = $this->client->where('id','<>',$id)->orderBy('last_name')->get()->pluck('parent_display', 'id');
+        $address = $this->clientAddress->where(['type' => 'home','client_id' => $client->id])->first();
+        $billing_address = $this->clientAddress->where(['type' => 'billing','client_id' => $client->id])->first();
+        
+        return view('admin.clients.edit', compact('client','clients','address','billing_address'));
     }
 
     /**
@@ -82,7 +91,10 @@ class ClientController extends BaseController {
     public function update($id, ClientRequest $clientRequest)
     {
         if($this->clientRepository->update($id,$clientRequest->client)){
-            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'Client']));
+            $this->clientAddress->where('client_id',$id)->delete();
+            $this->clientAddress->create($clientRequest->address + ['type' => 'home','client_id' => $id]);
+            $this->clientAddress->create($clientRequest->billing_address + ['type' => 'billing','client_id' => $id]);
+            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => Client::MODULE_NAME]));
         }
         else{
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));  
@@ -101,7 +113,7 @@ class ClientController extends BaseController {
         if($this->clientRepository->delete($id)){
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.delete',['module'=>'Client'])
+                'message' => trans('response.delete',['module' => Client::MODULE_NAME])
             ]);
         }
         return response()->json([
@@ -116,7 +128,7 @@ class ClientController extends BaseController {
         if (! $client = $this->clientRepository->find($id)) {
             return response()->json([
                 'status' => config('constants.ERROR_STATUS'),
-                'message' => trans('response.not_found',['module'=>'Client'])
+                'message' => trans('response.not_found',['module' => Client::MODULE_NAME])
             ]);
         }
 
@@ -125,7 +137,7 @@ class ClientController extends BaseController {
 
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.disabled',['module'=>'Client'])
+                'message' => trans('response.disabled',['module' => Client::MODULE_NAME])
             ]);
         }
         else{
@@ -133,7 +145,7 @@ class ClientController extends BaseController {
 
             return response()->json([
                 'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.enabled',['module'=>'Client'])
+                'message' => trans('response.enabled',['module' => Client::MODULE_NAME])
             ]);
         }
     }

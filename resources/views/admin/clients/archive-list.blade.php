@@ -2,32 +2,34 @@
   <table class="table zero-configuration" id="archive-list-datatable">
     <thead>
       <tr>
-        <th>Email</th>
-        @foreach($roles as $key=>$role)
-        <th>{{$role}}</th>
-        @endforeach
-        <th>Action</th>
+         <th>Primary acount</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Brokerage</th>
+          <th>Email</th>
+          <th>Special Pricing</th>
+          <th>Mobile</th>
+          <th>Action</th>
       </tr>
     </thead>
     <tbody>
       @foreach($archive_data as $archive)
+        
         <tr>
+          <td class="text-bold-500">{{ ($archive->primary_account) ? $archive->primary_account->last_name : null}}</td>
+          <td class="text-bold-500">{{ $archive->first_name }}</td>
+          <td class="text-bold-500">{{ $archive->last_name }}</td>
+          <td class="text-bold-500">{{ $archive->brokerage }}</td>
           <td class="text-bold-500">{{ $archive->email }}</td>
-          @foreach($roles as $key=>$role)
+          <td class="text-bold-500"></td>
+          <td class="text-bold-500">{{ $archive->mobile_phone }}</td>
           <td>
-              @if(!empty($archive->roles))
-                  @if (array_search($key, array_column($archive->roles->toArray(), 'id')) !== FALSE)
-                      <i class="bx bx-check font-medium-1"></i>
-                  @endif
-              @endif
-          </td>
-          @endforeach
-          <td>
-              <a href="{{route('admin.archive.restore')}}" data-model="User" data-archiveid="{{$archive->id}}" class="restore">
+              <a href="{{route('admin.archive.restore')}}" data-model="Client" data-archiveid="{{$archive->id}}" class="restore">
                   <i class="bx bx-reset mr-1"></i>
               </a>
           </td>
         </tr>
+
       @endforeach   
     </tbody>
   </table>

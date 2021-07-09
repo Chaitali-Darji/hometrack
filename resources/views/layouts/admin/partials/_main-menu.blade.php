@@ -42,7 +42,7 @@
             </li>
             <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Product Pricing">Product Pricing</span></a>
             </li>
-            <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Sales Tax">Sales Tax</span></a>
+            <li><a class="d-flex align-items-center" href="{{route('sales-tax.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Sales Tax">Sales Tax</span></a>
             </li>
             <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Client Pricing">Client Pricing</span></a>
             </li>
@@ -52,8 +52,6 @@
         <li class=" nav-item"><a href="#"><i class="bx bx-user"></i><span class="menu-title text-truncate" data-i18n="Clients">Clients</span></a>
           <ul class="menu-content">
             <li><a class="d-flex align-items-center" href="{{route('clients.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="View All">View All</span></a>
-            </li>
-            <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="New">New</span></a>
             </li>
             <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Import from RazorSync">Import from RazorSync</span></a>
             </li>
@@ -110,6 +108,7 @@
             <li><a class="d-flex align-items-center" href="{{route('email-templates.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Email Templates">Email Templates</span></a>
               <li><a class="d-flex align-items-center" href="{{route('sms-templates.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="SMS Templates">SMS Templates</span></a>
             </li>
+            <li><a class="d-flex align-items-center" href="{{route('states.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="States">States</span></a>
             <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Appointment Reminder Logs">Appointment Reminder Logs</span></a>
             </li>
             <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="RazorSync">RazorSync</span></a>

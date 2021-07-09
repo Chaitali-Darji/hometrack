@@ -47,7 +47,7 @@ class EmailTemplateController extends BaseController {
     {
         $users = $this->user->orderBy('name')->pluck('email','id')->toArray();
         if(!$email_template = $this->emailTemplateRepository->find($id)){
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => 'Email Template'])); 
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => EmailTemplate::MODULE_NAME])); 
             return redirect()->route('email-templates.index');
         }
         return view('admin.email-templates.add-edit', compact('email_template','users'));
@@ -63,7 +63,7 @@ class EmailTemplateController extends BaseController {
     public function update($id, EmailTemplateRequest $requestData)
     {
         if($this->emailTemplateRepository->updateEmailTemplate($id,$requestData->email_template)){
-            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'Email Template']));
+            Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => EmailTemplate::MODULE_NAME]));
         }
         else{
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   

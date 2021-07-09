@@ -30,6 +30,16 @@ class UserRepository
        return $this->model->create($attributes);   
     }
 
+    /**
+    * @param request 
+    * @return Model
+    */
+    public function createUser($userRequest)
+    {
+        $user = $this->model->create($userRequest->user);
+        return $user->roles()->sync($userRequest->roles); 
+    }
+
      /**
     * @param $id
     * @return Model

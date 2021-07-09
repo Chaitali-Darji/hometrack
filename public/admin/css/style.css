@@ -9,7 +9,7 @@
 
 .label-info {
     background-color: #39DA8A !important;
-	padding: 5px;
+	padding: 3px;
 }
 
 .sms-time{
@@ -23,4 +23,18 @@
 
 .pull-right {
     float: right !important;
+}
+
+.bootstrap-tagsinput {
+	width: 100% !important;
+	border: 1px solid #DFE3E7;
+    border-radius: .267rem;
+}
+
+.tag.label-info{
+	border-radius: 4px;
+}
+
+.invalid-feedback {
+	display: block !important;
 }

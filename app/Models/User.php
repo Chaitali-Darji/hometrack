@@ -15,6 +15,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
 
+    const MODULE_NAME = 'User';
+
     /**
      * The attributes that are mass assignable.
      *

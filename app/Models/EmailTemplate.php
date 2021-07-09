@@ -10,6 +10,8 @@ class EmailTemplate extends Model
 {
     use HasFactory, SoftDeletes;
 
+    const MODULE_NAME = 'Email Template';
+
     /**
      * The attributes that are mass assignable.
      *

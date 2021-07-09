@@ -54,7 +54,7 @@ class SettingController extends BaseController {
 
             $this->settingRepository->saveSetting('admin_auth_logo',$imageName);
         }
-        Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module'=>'Setting']));
+        Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => Setting::MODULE_NAME]));
         return redirect()->route('settings.index');
     }
 }
