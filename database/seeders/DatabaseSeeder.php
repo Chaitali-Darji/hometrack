@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SMSTemplateSeeder::class,
             StateSeeder::class,
+            RoleSeeder::class
         ]);
     }
 }

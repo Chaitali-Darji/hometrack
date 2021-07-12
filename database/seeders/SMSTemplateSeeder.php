@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\EmailTemplate;
+use App\Models\SMSTemplate;
 
 class SMSTemplateSeeder extends Seeder
 {
