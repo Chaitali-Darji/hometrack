@@ -23,7 +23,7 @@ function initAutocomplete() {
     // Create the autocomplete object, restricting the search predictions to
     // addresses in the US and Canada.
     autocomplete = new google.maps.places.Autocomplete(address1Field, {
-      componentRestrictions: { country: ["us", "ca"] },
+      componentRestrictions: { country: ["us"] },
       fields: ["address_components", "geometry"],
       types: ["address"],
     });
@@ -37,7 +37,7 @@ function initAutocomplete() {
     // Create the autocomplete object, restricting the search predictions to
     // addresses in the US and Canada.
     billingautocomplete = new google.maps.places.Autocomplete(billingaddress1Field, {
-      componentRestrictions: { country: ["us", "ca"] },
+      componentRestrictions: { country: ["us"] },
       fields: ["address_components", "geometry"],
       types: ["address"],
     });

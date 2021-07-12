@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             ModuleSeeder::class,
             TemplateSeeder::class,
             UserSeeder::class,
+            SMSTemplateSeeder::class,
+            StateSeeder::class,
         ]);
     }
 }

@@ -30,4 +30,9 @@ class Role extends Model
     {
         return $this->belongsToMany(Module::class, 'role_modules', 'role_id', 'module_id')->withTimestamps();
     }
+
+    public function AdminRole()
+    {
+        return Self::Where('name', 'Admin')->first();
+    }
 }

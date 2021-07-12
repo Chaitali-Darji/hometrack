@@ -17,17 +17,17 @@
                      @include('admin.partials._session-message')
 
                       @if(isset($role))
-                         {!! Form::model($role, array('route' => array('roles.update', $role->id),'id' => 'jquery-role-form')) !!}
+                         {!! Form::model($role, array('route' => array('roles.update', $role->id),'id' => 'jquery-role-form', 'class' => 'jquery-validate-form')) !!}
                          {{ method_field('PATCH') }}
                          {!! Form::hidden('id', isset($client) ? $role->id : null) !!}
                       @else
-                        {!! Form::open(array('route' => 'roles.store', 'autocomplete' => 'off','id' => 'jquery-role-form')) !!}
-                      @endif    
+                        {!! Form::open(array('route' => 'roles.store', 'autocomplete' => 'off','id' => 'jquery-role-form', 'class' => 'jquery-validate-form')) !!}
+                      @endif
                           <div class="row">
                             <div class="col-md-6">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Name:') !!}
-                                {!! Form::text('role[name]', isset($role) ? $role->name : null, array('class' => 'form-control', 'required' => true)) !!}
+                                {!! Form::text('role[name]', isset($role) ? $role->name : null, array('class' => 'form-control required')) !!}
                                  @error('role.name')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
                                     </div>
                                   </fieldset>
                                 </div>
-                                @endforeach                              
+                                @endforeach
                               </div>
 
                             </div>
@@ -58,7 +58,7 @@
                             {!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}
                             {!! link_to_route('roles.index', 'Cancel', null, array('class' => 'btn')) !!}
                           </div>
-                      {!! Form::close() !!} 
+                      {!! Form::close() !!}
                     </div>
                   </div>
                 </div>

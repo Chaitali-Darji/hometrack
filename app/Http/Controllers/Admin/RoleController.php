@@ -132,21 +132,10 @@ class RoleController extends BaseController {
             ]);
         }
 
-        if($role->is_active){
-            $this->roleRepository->update($id,['is_active' => 0]);
-
-            return response()->json([
-                'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.disabled',['module' => Role::MODULE_NAME])
-            ]);
-        }
-        else{
-            $this->roleRepository->update($id,['is_active' => 1]);
-
-            return response()->json([
-                'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.enabled',['module' => Role::MODULE_NAME])
-            ]);
-        }
+        $this->roleRepository->update($id,['is_active' => ($role->is_active) ? 0 : 1]);
+        return response()->json([
+            'status' => config('constants.SUCCESS_STATUS'),
+            'message' => trans(($role->is_active) ? 'response.disabled' : 'response.enabled',['module' => Role::MODULE_NAME])
+        ]);
     }
 }

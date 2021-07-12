@@ -13,7 +13,7 @@ class CreateServicePriceColumnTable extends Migration
      */
     public function up()
     {
-        Schema::create('service_price_columns', function (Blueprint $table) {
+        Schema::create('special_pricing_columns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->boolean('is_active')->default(1);
@@ -31,6 +31,6 @@ class CreateServicePriceColumnTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('service_price_columns');
+        Schema::dropIfExists('special_pricing_columns');
     }
 }

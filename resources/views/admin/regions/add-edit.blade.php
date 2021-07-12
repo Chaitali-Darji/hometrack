@@ -11,25 +11,25 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">State Add/Edit</h4>
+                                    <h4 class="card-title">Region Add/Edit</h4>
                                 </div>
                                 <div class="card-body">
                                     @include('admin.partials._session-message')
 
-                                    @if(isset($state))
-                                        {!! Form::model($state, array('route' => array('states.update', $state->id),'id' => 'jquery-state-form', 'class' => 'jquery-validate-form')) !!}
+                                    @if(isset($region))
+                                        {!! Form::model($region, array('route' => array('regions.update', $region->id),'id' => 'jquery-region-form', 'class' => 'jquery-validate-form')) !!}
                                         {{ method_field('PATCH') }}
-                                        {!! Form::hidden('id', isset($client) ? $state->id : null) !!}
+                                        {!! Form::hidden('id', isset($client) ? $region->id : null) !!}
                                     @else
-                                        {!! Form::open(array('route' => 'states.store', 'autocomplete' => 'off','id' => 'jquery-state-form', 'class' => 'jquery-validate-form')) !!}
+                                        {!! Form::open(array('route' => 'regions.store', 'autocomplete' => 'off','id' => 'jquery-region-form', 'class' => 'jquery-validate-form')) !!}
                                     @endif
                                     <div class="row">
                                         <div class="col-md-6">
                                             <fieldset class="form-group">
                                                 {!! Form::label('name', 'Name:') !!}
-                                                {!! Form::text('state[name]', isset($state) ? $state->name : null, array('class' => 'form-control required')) !!}
-                                                @error('state.name')
-                                                <span class="invalid-feedback" state="alert">
+                                                {!! Form::text('region[name]', isset($region) ? $region->name : null, array('class' => 'form-control required')) !!}
+                                                @error('region.name')
+                                                <span class="invalid-feedback" region="alert">
                                                   <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="row">
                                         {!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}
-                                        {!! link_to_route('states.index', 'Cancel', null, array('class' => 'btn')) !!}
+                                        {!! link_to_route('services.index', 'Cancel', null, array('class' => 'btn')) !!}
                                     </div>
                                     {!! Form::close() !!}
                                 </div>
@@ -53,5 +53,5 @@
 @endsection
 
 @section('page-script')
-    <script src="{{asset('admin/js/scripts/pages/states/add-edit.js')}}"></script>
+    <script src="{{asset('admin/js/scripts/pages/regions/add-edit.js')}}"></script>
 @endsection

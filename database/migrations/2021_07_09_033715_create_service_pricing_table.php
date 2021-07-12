@@ -13,7 +13,7 @@ class CreateServicePricingTable extends Migration
      */
     public function up()
     {
-        Schema::create('pricing', function (Blueprint $table) {
+        Schema::create('service_pricing', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('service_id');
             $table->string('code');
@@ -29,7 +29,6 @@ class CreateServicePricingTable extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -40,6 +39,6 @@ class CreateServicePricingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pricing');
+        Schema::dropIfExists('service_pricing');
     }
 }

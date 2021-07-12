@@ -33,9 +33,9 @@
 
 <script src="{{asset('admin/js/scripts/toastr.min.js')}}"></script>
 <script src="{{asset('admin/js/scripts/sweetalert.min.js')}}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js" integrity="sha512-6Jym48dWwVjfmvB0Hu3/4jn4TODd6uvkxdi9GNbBHwZ4nGcRxJUCaTkL3pVY6XUQABqFo3T58EMXFQztbjvAFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="https://www.pixinvent.com/demo/frest-clean-bootstrap-admin-dashboard-template/app-assets/vendors/js/extensions/moment.min.js"></script>
-<script type="text/javascript" src="https://www.pixinvent.com/demo/frest-clean-bootstrap-admin-dashboard-template/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+<script src="{{asset('admin/js/scripts/jquery.inputmask.min.js')}}" integrity="sha512-6Jym48dWwVjfmvB0Hu3/4jn4TODd6uvkxdi9GNbBHwZ4nGcRxJUCaTkL3pVY6XUQABqFo3T58EMXFQztbjvAFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="{{asset('admin/js/scripts/moment.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('admin/js/scripts/daterangepicker.js')}}"></script>
 <script src="{{asset('admin/js/scripts/bootstrap-tagsinput.min.js')}}"></script>
 <script src="{{asset('admin/js/scripts/embed.js')}}"></script>
 

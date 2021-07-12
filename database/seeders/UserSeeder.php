@@ -22,14 +22,15 @@ class UserSeeder extends Seeder
             'password' => 'Admin@123'
         ));
 
-        $user->roles()->sync([1]);
+        $role = Role::AdminRole();
 
-        $modules = Module::all();
-
-        $role = Role::find(1);
-
-        foreach ($modules as $key => $value) {
-            $role->modules()->sync([$value->id]);
+        if($role){
+            $user->roles()->sync([$role->id]);
+            $modules = Module::all();
+            foreach ($modules as $key => $value) {
+                $role->modules()->sync([$value->id]);
+            }
         }
+
     }
 }

@@ -14,17 +14,17 @@
                     <div class="card-header">
                       <h4 class="card-title">General Settings</h4>
                     </div>
-                    
+
                     <div class="card-body">
                         @include('admin.partials._session-message')
 
-                        {!! Form::open(array('route' => 'settings.setting-change', 'autocomplete' => 'off','id' => 'jquery-setting-form','files' => true)) !!}
+                        {!! Form::open(array('route' => 'settings.setting-change', 'autocomplete' => 'off','id' => 'jquery-setting-form','files' => true, 'class' => 'jquery-validate-form')) !!}
 
                           <div class="row">
                             <div class="col-md-6">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Site Name:') !!}
-                                {!! Form::text('setting[name]', isset($settings['name']) ? $settings['name'] : null, array('class' => 'form-control', 'required' => true)) !!}
+                                {!! Form::text('setting[name]', $settings['name'] ?? null, array('class' => 'form-control required required')) !!}
                                  @error('setting.name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -39,7 +39,7 @@
                               <fieldset class="form-group">
                                 {!! Form::label('site Admin Logo', 'Site Admin Logo:') !!}
                                 <div class="custom-file">
-                                  {!! Form::file('admin_logo', null, array('class' => 'custom-file-input')) !!}
+                                  {!! Form::file('admin_logo', null, array('class' => 'custom-file-input file')) !!}
                                   <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                 </div>
                               </fieldset>
@@ -58,7 +58,7 @@
                               <fieldset class="form-group">
                                 <label for="basicInputFile">Site Auth Logo</label>
                                 <div class="custom-file">
-                                  {!! Form::file('admin_auth_logo', null, array('class' => 'custom-file-input')) !!}
+                                  {!! Form::file('admin_auth_logo', null, array('class' => 'custom-file-input file')) !!}
                                   <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
                                 </div>
                               </fieldset>
@@ -80,7 +80,7 @@
                               {!! link_to_route('settings.index', 'Cancel', null, array('class' => 'btn')) !!}
                             </div>
                           </div>
-                      {!! Form::close() !!} 
+                      {!! Form::close() !!}
                     </div>
                   </div>
               </div>

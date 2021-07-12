@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\SMSTemplateController;   
 use App\Http\Controllers\Admin\SalesTaxController;
 use App\Http\Controllers\Admin\StateController;   
+use App\Http\Controllers\Admin\RegionController;   
+use App\Http\Controllers\Admin\ServiceTypeController; 
+use App\Http\Controllers\Admin\ServicesController;   
 
 Route::middleware(['auth','roles.auth'])->group(static function () {
 
@@ -48,4 +51,15 @@ Route::middleware(['auth','roles.auth'])->group(static function () {
     //State
     Route::resource('states', StateController::class);
     Route::POST('/states/active-inactive/{id}', [StateController::class, 'activeInactive'])->name('admin.states.active-inactive');
+
+    //Region
+    Route::resource('regions', RegionController::class);
+    Route::POST('/regions/active-inactive/{id}', [RegionController::class, 'activeInactive'])->name('admin.regions.active-inactive');
+
+    //Service Types
+    Route::resource('service-types', ServiceTypeController::class);
+    Route::POST('/service-types/active-inactive/{id}', [ServiceTypeController::class, 'activeInactive'])->name('admin.service-types.active-inactive');
+
+    //Services
+    Route::resource('services', ServicesController::class);
 });

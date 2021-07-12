@@ -123,21 +123,10 @@ class StateController extends BaseController {
             ]);
         }
 
-        if($state->is_active){
-            $this->stateRepository->update($id,['is_active' => 0]);
-
-            return response()->json([
-                'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.disabled',['module' => State::MODULE_NAME])
-            ]);
-        }
-        else{
-            $this->stateRepository->update($id,['is_active' => 1]);
-
-            return response()->json([
-                'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.enabled',['module' => State::MODULE_NAME])
-            ]);
-        }
+        $this->stateRepository->update($id,['is_active' => ($state->is_active) ? 0 : 1]);
+        return response()->json([
+            'status' => config('constants.SUCCESS_STATUS'),
+            'message' => trans(($state->is_active) ? 'response.disabled' : 'response.enabled',['module' => State::MODULE_NAME])
+        ]);
     }
 }

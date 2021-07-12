@@ -108,6 +108,8 @@
             <li><a class="d-flex align-items-center" href="{{route('email-templates.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Email Templates">Email Templates</span></a>
               <li><a class="d-flex align-items-center" href="{{route('sms-templates.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="SMS Templates">SMS Templates</span></a>
             </li>
+            <li><a class="d-flex align-items-center" href="{{route('regions.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Regions">Regions</span></a>
+            <li><a class="d-flex align-items-center" href="{{route('service-types.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Regions">Service Types</span></a>
             <li><a class="d-flex align-items-center" href="{{route('states.index')}}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="States">States</span></a>
             <li><a class="d-flex align-items-center" href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Appointment Reminder Logs">Appointment Reminder Logs</span></a>
             </li>

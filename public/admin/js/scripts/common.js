@@ -5,6 +5,8 @@ $(document).ready( function () {
         }
     });
 
+        $('.jquery-validate-form').validate();
+
      toastr.options = {
       "closeButton": true,
       "newestOnTop": true,
@@ -15,7 +17,7 @@ $(document).ready( function () {
         $($.fn.dataTable.tables( true ) ).css('width', '100%');
         $($.fn.dataTable.tables( true ) ).DataTable().columns.adjust().draw();
         $($.fn.dataTable.tables( true ) ).ajax.reload();
-    } ); 
+    } );
 
     $('.restore').on('click', function (event) {
         event.preventDefault();

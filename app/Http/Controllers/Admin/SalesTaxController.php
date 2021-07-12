@@ -121,28 +121,17 @@ class SalesTaxController extends BaseController {
 
     public function activeInactive($id){
 
-        if (! $role = $this->salesTaxRepository->find($id)) {
+        if (! $salestax = $this->salesTaxRepository->find($id)) {
             return response()->json([
                 'status' => config('constants.ERROR_STATUS'),
                 'message' => trans('response.not_found',['module' => SalesTax::MODULE_NAME])
             ]);
         }
 
-        if($role->is_active){
-            $this->salesTaxRepository->update($id,['is_active' => 0]);
-
-            return response()->json([
-                'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.disabled',['module' => SalesTax::MODULE_NAME])
-            ]);
-        }
-        else{
-            $this->salesTaxRepository->update($id,['is_active' => 1]);
-
-            return response()->json([
-                'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.enabled',['module' => SalesTax::MODULE_NAME])
-            ]);
-        }
+        $this->salesTaxRepository->update($id,['is_active' => ($salestax->is_active) ? 0 : 1]);
+        return response()->json([
+            'status' => config('constants.SUCCESS_STATUS'),
+            'message' => trans(($salestax->is_active) ? 'response.disabled' : 'response.enabled',['module' => SalesTax::MODULE_NAME])
+        ]);
     }
 }

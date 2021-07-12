@@ -28,7 +28,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/pages/app-users.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-tagsinput.css')}}">
 
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="{{asset('admin/css/daterangepicker.css')}}" />
 
 <!-- BEGIN: Custom CSS-->
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/style.css')}}">

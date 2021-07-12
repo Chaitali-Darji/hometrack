@@ -18,6 +18,9 @@ class ClientController extends BaseController {
     private $clientRepository;
     private $client;
     private $clientAddress;
+
+    const HOME_ADDRESS = 'home';
+    const BILLING_ADDRESS = 'billing';
    
     public function __construct(ClientRepository $clientRepository, Client $client, ClientAddress $clientAddress)
    {
@@ -56,7 +59,7 @@ class ClientController extends BaseController {
     public function store(ClientRequest $clientRequest)
     {
         $client = $this->clientRepository->create($clientRequest->client);
-        $this->clientAddress->create($clientRequest->address + ['type' => 'home','client_id' => $client->id]);
+        $this->clientAddress->create($clientRequest->address + ['type' => HOME_ADDRESS,'client_id' => $client->id]);
         Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module' => Client::MODULE_NAME]));
         return Redirect::route('clients.index');
     }
@@ -75,8 +78,8 @@ class ClientController extends BaseController {
         }
 
         $clients = $this->client->where('id','<>',$id)->orderBy('last_name')->get()->pluck('parent_display', 'id');
-        $address = $this->clientAddress->where(['type' => 'home','client_id' => $client->id])->first();
-        $billing_address = $this->clientAddress->where(['type' => 'billing','client_id' => $client->id])->first();
+        $address = $this->clientAddress->where(['type' => HOME_ADDRESS,'client_id' => $client->id])->first();
+        $billing_address = $this->clientAddress->where(['type' => BILLING_ADDRESS,'client_id' => $client->id])->first();
         
         return view('admin.clients.edit', compact('client','clients','address','billing_address'));
     }
@@ -92,8 +95,8 @@ class ClientController extends BaseController {
     {
         if($this->clientRepository->update($id,$clientRequest->client)){
             $this->clientAddress->where('client_id',$id)->delete();
-            $this->clientAddress->create($clientRequest->address + ['type' => 'home','client_id' => $id]);
-            $this->clientAddress->create($clientRequest->billing_address + ['type' => 'billing','client_id' => $id]);
+            $this->clientAddress->create($clientRequest->address + ['type' => HOME_ADDRESS,'client_id' => $id]);
+            $this->clientAddress->create($clientRequest->billing_address + ['type' => BILLING_ADDRESS,'client_id' => $id]);
             Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => Client::MODULE_NAME]));
         }
         else{
@@ -132,21 +135,10 @@ class ClientController extends BaseController {
             ]);
         }
 
-        if($client->is_active){
-            $this->clientRepository->update($id,array('is_active' => 0));
-
-            return response()->json([
-                'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.disabled',['module' => Client::MODULE_NAME])
-            ]);
-        }
-        else{
-            $this->clientRepository->update($id,['is_active' => 1]);
-
-            return response()->json([
-                'status' => config('constants.SUCCESS_STATUS'),
-                'message' => trans('response.enabled',['module' => Client::MODULE_NAME])
-            ]);
-        }
+        $this->clientRepository->update($id,['is_active' => ($client->is_active) ? 0 : 1]);
+        return response()->json([
+            'status' => config('constants.SUCCESS_STATUS'),
+            'message' => trans(($client->is_active) ? 'response.disabled' : 'response.enabled',['module' => Client::MODULE_NAME])
+        ]);
     }
 }
