@@ -28,8 +28,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
-                @include('admin.partials._session-message')
-
+                
                 <div class="table-responsive">
                     <table class="table" id="regions-datatable">
                         <thead>
@@ -70,7 +69,6 @@
                 </div>
             </div>
             <div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
-                @include('admin.partials._session-message')
                 @include('admin.regions.archive-list')
             </div>
         </div>

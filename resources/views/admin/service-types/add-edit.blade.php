@@ -19,7 +19,7 @@
                                     @if(isset($service_type))
                                         {!! Form::model($service_type, array('route' => array('service-types.update', $service_type->id),'id' => 'jquery-service_type-form', 'class' => 'jquery-validate-form')) !!}
                                         {{ method_field('PATCH') }}
-                                        {!! Form::hidden('id', isset($client) ? $service_type->id : null) !!}
+                                        {!! Form::hidden('id', isset($service_type) ? $service_type->id : null) !!}
                                     @else
                                         {!! Form::open(array('route' => 'service-types.store', 'autocomplete' => 'off','id' => 'jquery-service_type-form', 'class' => 'jquery-validate-form')) !!}
                                     @endif

@@ -62,4 +62,5 @@ Route::middleware(['auth','roles.auth'])->group(static function () {
 
     //Services
     Route::resource('services', ServicesController::class);
+    Route::POST('/services/active-inactive/{id}', [ServicesController::class, 'activeInactive'])->name('admin.services.active-inactive');
 });
