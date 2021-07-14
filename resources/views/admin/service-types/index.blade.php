@@ -7,7 +7,7 @@
                     <h4 class="card-title">Service Types</h4>
                 </div>
                 <div class="col-md-6"><a href="{{route('service-types.create')}}"
-                                         class="btn btn-primary pull-right">Add</a></div>
+                                         class="btn btn-primary round pull-right">Add</a></div>
             </div>
         </div>
     </div>

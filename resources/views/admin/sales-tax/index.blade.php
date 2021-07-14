@@ -17,7 +17,7 @@
                                         <h4 class="card-title">Sales Tax</h4>
                                     </div>
                                     <div class="col-md-6"><a href="{{route('sales-tax.create')}}"
-                                                             class="btn btn-primary pull-right">Add</a></div>
+                                                             class="btn round btn-primary pull-right">Add</a></div>
                                 </div>
                             </div>
                         </div>

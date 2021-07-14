@@ -38,3 +38,9 @@
 .invalid-feedback {
 	display: block !important;
 }
+.main-menu .navbar-header .navbar-brand .brand-logo .logo{
+    height: auto!important;
+}
+.img-fluid, .img-thumbnail{
+    width: 80%;
+}

@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        {!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}
+                                        {!! Form::submit('Submit', array('class' => 'btn round btn-primary')) !!}
                                         {!! link_to_route('services.index', 'Cancel', null, array('class' => 'btn')) !!}
                                     </div>
                                     {!! Form::close() !!}

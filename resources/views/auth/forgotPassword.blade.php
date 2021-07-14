@@ -16,7 +16,7 @@
                             <div class="form-group d-flex justify-content-between align-items-center mb-2">
                                 <div class="text-left">
                                     <div class="ml-3 ml-md-2 mr-1"><a href="{{route('index')}}"
-                                            class="card-link btn btn-outline-primary text-nowrap">Sign
+                                            class="card-link btn round btn-outline-primary text-nowrap">Sign
                                             in</a></div>
                                 </div>
                                 <!-- <div class="mr-3"><a href="{{route('register')}}"
@@ -34,7 +34,7 @@
                                             Phone</label>
                                         <input type="text" class="form-control" id="exampleInputEmailPhone1"
                                             placeholder="Email or Phone"></div>
-                                    <button type="submit" class="btn btn-primary glow position-relative w-100">SEND
+                                    <button type="submit" class="btn round btn-primary glow position-relative w-100">SEND
                                         PASSWORD<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
                                 </form>
                                 <div class="text-center mb-2"><a href="{{route('index')}}"><small class="text-muted">I

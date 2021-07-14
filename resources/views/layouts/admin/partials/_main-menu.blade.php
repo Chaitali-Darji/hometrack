@@ -4,7 +4,7 @@
         <li class="nav-item mr-auto">
           <a class="navbar-brand" href="{{route('dashboard')}}">
             <div class="brand-logo">
-              <img class="logo" src="{{ config('settings.admin_logo') ? asset(config('constants.SETTING_IMAGE_URL').config('settings.admin_logo')) : asset('admin/images/logo/hometrack_admin_logo.png')}}" alt="avatar" height="26" width="185">
+              <img class="logo" src="{{ config('settings.admin_logo') ? asset(config('constants.SETTING_IMAGE_URL').config('settings.admin_logo')) : asset('admin/images/logo/hometrack_admin_logo.png')}}" alt="avatar"  width="175">
             </div>
           </a>
         </li>

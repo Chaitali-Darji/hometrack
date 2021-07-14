@@ -48,8 +48,8 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        {!! Form::submit('Submit', array('class' => 'btn btn-primary')) !!}
-                                        {!! link_to_route('sales-tax.index', 'Cancel', null, array('class' => 'btn')) !!}
+                                        {!! Form::submit('Submit', array('class' => 'btn round btn-primary')) !!}
+                                        {!! link_to_route('sales-tax.index', 'Cancel', null, array('class' => 'btn ')) !!}
                                     </div>
                                     {!! Form::close() !!}
                                 </div>

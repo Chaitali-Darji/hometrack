@@ -48,7 +48,7 @@ class ClientController extends BaseController {
      */
     public function create()
     {
-        return view('admin.clients.add');
+        return view('admin.clients.add-edit');
     }
 
     /**

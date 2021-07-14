@@ -15,7 +15,7 @@
                   <div class="col-md-6">
                         <h4 class="card-title">SMS Templates</h4>
                   </div>
-                  <div class="col-md-6"><button id="reminder" class="btn btn-xs btn-primary pull-right" type="button">Appointment Reminder Time</button></div>
+                  <div class="col-md-6"><button id="reminder" class="btn round btn-xs btn-primary pull-right" type="button">Appointment Reminder Time</button></div>
                 </div>
               </div>
             </div>
@@ -31,7 +31,7 @@
                           </div>
                           <div class="col-md-5">
                             <input type="time" name="time" class="form-control sms-time" value="{{config('settings.appointment_reminder_time') ?? ''}}">
-                            {!! Form::submit('Save', array('class' => 'btn btn-primary')) !!}
+                            {!! Form::submit('Save', array('class' => 'btn round btn-primary')) !!}
                           </div>
                           <div class="col-md-4">
                           </div>
@@ -94,8 +94,8 @@
 
               </div>
               <div class="modal-footer">
-                  {!! Form::button('Cancel', array('class' => 'btn btn-secondary','data-dismiss'=> 'modal')) !!}
-                  {!! Form::submit('Save changes', array('class' => 'btn btn-primary','id' => 'save_data')) !!}
+                  {!! Form::button('Cancel', array('class' => 'btn round btn-secondary','data-dismiss'=> 'modal')) !!}
+                  {!! Form::submit('Save changes', array('class' => 'btn round btn-primary','id' => 'save_data')) !!}
               </div>
               {!! Form::close() !!} 
           </div>
@@ -122,8 +122,8 @@
 
                   </div>
                   <div class="modal-footer">
-                      {!! Form::button('Close', array('class' => 'btn btn-secondary','data-dismiss'=> 'modal')) !!}
-                      {!! Form::submit('Send SMS', array('class' => 'btn btn-primary','id' => 'save_data')) !!}
+                      {!! Form::button('Close', array('class' => 'btn round btn-secondary','data-dismiss'=> 'modal')) !!}
+                      {!! Form::submit('Send SMS', array('class' => 'btn round btn-primary','id' => 'save_data')) !!}
                   </div>
                {!! Form::close() !!} 
           </div>

@@ -23,7 +23,18 @@
         <div class="content-header row">
         </div>
         <div class="content-body">
-            @yield('content')
+          <section id="auth-login" class="row flexbox-container">
+            <div class="col-xl-5 col-11">
+              <div class="card bg-authentication mb-0">
+                <div class="row m-0">
+                  <div class="col-md-12 d-md-block d-none text-center align-self-center p-3">
+                    @include('auth.common._auth_logo')
+                  </div>
+                  @yield('content')
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>

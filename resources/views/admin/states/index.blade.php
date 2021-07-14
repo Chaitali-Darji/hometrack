@@ -16,7 +16,7 @@
                   <div class="col-md-6">
                         <h4 class="card-title">States</h4>
                   </div>
-                  <div class="col-md-6"><a href="{{route('states.create')}}" class="btn btn-primary pull-right">Add</a></div>
+                  <div class="col-md-6"><a href="{{route('states.create')}}" class="btn round btn-primary pull-right">Add</a></div>
                 </div>
               </div>
             </div>

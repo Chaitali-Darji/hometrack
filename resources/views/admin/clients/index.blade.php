@@ -16,7 +16,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <a href="{{route('clients.create')}}"
-                                           class="btn btn-primary pull-right">Add</a>
+                                           class="btn round btn-primary pull-right">Add</a>
                                     </div>
                                 </div>
                             </div>
