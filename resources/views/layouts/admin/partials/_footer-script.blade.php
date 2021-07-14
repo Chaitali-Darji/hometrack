@@ -20,6 +20,7 @@
 <script src="{{asset('admin/vendors/js/tables/datatable/vfs_fonts.js')}}"></script>
 <script src="{{asset('admin/vendors/js/file-uploaders/dropzone.min.js')}}"></script>
 <script src="{{asset('admin/vendors/js/ui/prism.min.js')}}"></script>
+<script src="{{asset('admin/vendors/js/forms/repeater/jquery.repeater.min.js')}}"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
@@ -29,6 +30,7 @@
 <script src="{{asset('admin/js/scripts/components.min.js')}}"></script>
 <script src="{{asset('admin/js/scripts/footer.min.js')}}"></script>
 <script src="{{asset('admin/js/scripts/customizer.min.js')}}"></script>
+<script src="{{asset('admin/js/scripts/forms/form-repeater.min.js')}}"></script>
 <!-- END: Theme JS-->
 
 <script src="{{asset('admin/js/scripts/toastr.min.js')}}"></script>
@@ -38,5 +40,6 @@
 <script type="text/javascript" src="{{asset('admin/js/scripts/daterangepicker.js')}}"></script>
 <script src="{{asset('admin/js/scripts/bootstrap-tagsinput.min.js')}}"></script>
 <script src="{{asset('admin/js/scripts/embed.js')}}"></script>
+
 
 <script src="{{asset('admin/js/scripts/common.js')}}"></script>

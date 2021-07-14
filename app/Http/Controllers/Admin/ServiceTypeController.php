@@ -60,7 +60,7 @@ class ServiceTypeController extends BaseController {
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
         }
 
-        return Redirect::route('service-types.index');
+        return Redirect::route('services.index');
     }
 
     /**
@@ -73,7 +73,7 @@ class ServiceTypeController extends BaseController {
     {
         if(!$service_type = $this->serviceTypeRepository->find($id)){
             Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => ServiceType::MODULE_NAME]));
-            return redirect()->route('service-types.index');
+            return redirect()->route('services.index');
         }
         return view('admin.service-types.add-edit', compact('service_type'));
     }
@@ -93,7 +93,7 @@ class ServiceTypeController extends BaseController {
         else{
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
         }
-        return redirect()->route('service-types.index');
+        return redirect()->route('services.index');
     }
 
     /**

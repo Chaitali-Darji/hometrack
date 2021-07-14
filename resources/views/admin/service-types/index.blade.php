@@ -31,8 +31,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="service-type-home" aria-labelledby="service-type-home-tab" role="tabpanel">
-                @include('admin.partials._session-message')
-
+              
                 <div class="table-responsive">
                     <table class="table" id="service-types-datatable">
                         <thead>
@@ -73,7 +72,6 @@
                 </div>
             </div>
             <div class="tab-pane" id="service-type-profile" aria-labelledby="service-type-profile-tab" role="tabpanel">
-                @include('admin.partials._session-message')
                 @include('admin.service-types.archive-list')
             </div>
         </div>

@@ -17,10 +17,11 @@ class CreateServiceTable extends Migration
             $table->id();
             $table->unsignedBigInteger('region_id');
             $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('service_type_id');
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('youtube_or_vimeo_link')->nullable();
-            $table->boolean('display_section')->default(1);
+            $table->enum('display_section',['photography','listing','marketing','none'])->default('none');
             $table->boolean('notes_required')->default(1);
             $table->string('display_icon')->nullable();
             $table->integer('sort')->default(0);
@@ -32,7 +33,7 @@ class CreateServiceTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade')->onUpdate('cascade');
-
+            $table->foreign('service_type_id')->references('id')->on('service_types')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

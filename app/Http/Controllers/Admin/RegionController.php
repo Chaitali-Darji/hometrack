@@ -60,7 +60,7 @@ class RegionController extends BaseController {
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
         }
 
-        return Redirect::route('regions.index');
+        return Redirect::route('services.index');
     }
 
     /**
@@ -73,7 +73,7 @@ class RegionController extends BaseController {
     {
         if(!$region = $this->regionRepository->find($id)){
             Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => Region::MODULE_NAME]));
-            return redirect()->route('regions.index');
+            return redirect()->route('services.index');
         }
         return view('admin.regions.add-edit', compact('region'));
     }
@@ -93,7 +93,7 @@ class RegionController extends BaseController {
         else{
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
         }
-        return redirect()->route('regions.index');
+        return redirect()->route('services.index');
     }
 
     /**

@@ -31,6 +31,6 @@ class CreateSmsTemplateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sms_template');
+        Schema::dropIfExists('sms_templates');
     }
 }

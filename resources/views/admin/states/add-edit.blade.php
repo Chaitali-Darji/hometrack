@@ -19,7 +19,7 @@
                                     @if(isset($state))
                                         {!! Form::model($state, array('route' => array('states.update', $state->id),'id' => 'jquery-state-form', 'class' => 'jquery-validate-form')) !!}
                                         {{ method_field('PATCH') }}
-                                        {!! Form::hidden('id', isset($client) ? $state->id : null) !!}
+                                        {!! Form::hidden('id', isset($state) ? $state->id : null) !!}
                                     @else
                                         {!! Form::open(array('route' => 'states.store', 'autocomplete' => 'off','id' => 'jquery-state-form', 'class' => 'jquery-validate-form')) !!}
                                     @endif
