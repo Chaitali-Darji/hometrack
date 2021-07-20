@@ -11,14 +11,14 @@
           <div class="card">
             <div class="card-header">
               <div class="card-title">
-                <h4 class="card-title">Email Templates</h4>
+                  <h4 class="card-title text-hena">Email Templates</h4>
               </div>
             </div>
             <div class="card-body">
-                  @include('admin.partials._session-message')
+
                   
                     <div class="table-responsive">
-                      <table class="table" id="email_templates-datatable">
+                        <table class="table dtable" id="email_templates-datatable">
                         <thead>
                           <tr>
                             <th>Name</th>
@@ -29,13 +29,13 @@
                         <tbody>
                             @foreach($email_templates as $email_template)
                               <tr>
-                                <td class="text-bold-500">{{ $email_template->name }}</td>
+                                  <td>{{ $email_template->name }}</td>
                                 <td>
                                   {{ $email_template->description }}
                                 </td>
                                 <td>
                                     <a href="{{route('email-templates.edit',$email_template->id)}}">
-                                        <i class="bx bx-edit-alt mr-1"></i>
+                                        <i class="bx bx-edit-alt text-hena mr-1"></i>
                                     </a>
                                 </td>
                               </tr>
@@ -53,5 +53,6 @@
 @endsection
 
 @section('page-script')
-    <script src="{{asset('admin/js/scripts/pages/roles/list.js')}}"></script>
+    @include('admin.partials._session-message')
+    <script src="{{asset('admin/js/scripts/pages/email-templates/list.js')}}"></script>
 @endsection

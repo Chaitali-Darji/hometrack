@@ -14,9 +14,10 @@
               <div class="card-title w100">
                 <div class="row">
                   <div class="col-md-6">
-                        <h4 class="card-title">Roles</h4>
+                      <h4 class="card-title text-hena">Roles</h4>
                   </div>
-                  <div class="col-md-6"><a href="{{route('roles.create')}}" class="btn round btn-primary pull-right">Add</a></div>
+                    <div class="col-md-6"><a href="{{route('roles.create')}}"
+                                             class="btn round btn-hena pull-right">Add</a></div>
                 </div>
               </div>
             </div>
@@ -37,15 +38,15 @@
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
-                  @include('admin.partials._session-message')
+
                   
                     <div class="table-responsive">
-                      <table class="table" id="roles-datatable">
+                        <table class="table dtable" id="roles-datatable">
                         <thead>
                           <tr>
                             <th>Name</th>
                             <th>Permissions</th>
-                            <th>Action</th>
+                              <th width="15%">Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -63,14 +64,15 @@
                                 </td>
                                 <td>
                                     <a href="{{route('roles.edit',$role->id)}}">
-                                        <i class="bx bx-edit-alt mr-1"></i>
+                                        <i class="bx bx-edit-alt text-hena mr-1"></i>
                                     </a>
 
                                     <a href="{{route('roles.destroy',$role->id)}}" data-roleid="{{$role->id}}" class="delete-confirm">
-                                        <i class="bx bx-trash mr-1"></i>
+                                        <i class="bx bx-trash text-danger mr-1"></i>
                                     </a>
 
-                                    <div class="custom-control custom-switch custom-switch-success mr-2 mb-1" style="display: inline-block;">
+                                    <div class="custom-control custom-switch custom-switch-success mr-2"
+                                         style="display: inline-block;">
                                       <input type="checkbox" class="custom-control-input active-role" data-roleid= "{{$role->id}}" id="customSwitchcolor{{$role->id}}" data-url="{{route('admin.roles.active-inactive',$role->id)}}" @if($role->is_active) checked @endif>
                                       <label class="custom-control-label" for="customSwitchcolor{{$role->id}}" ></label>
                                     </div>
@@ -83,8 +85,7 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
-                  @include('admin.partials._session-message')
-                  @include('admin.roles.archive-list')                  
+                    @include('admin.roles.archive-list')
                 </div>
               </div>
             </div>
@@ -97,5 +98,6 @@
 @endsection
 
 @section('page-script')
+    @include('admin.partials._session-message')
     <script src="{{asset('admin/js/scripts/pages/roles/list.js')}}"></script>
 @endsection

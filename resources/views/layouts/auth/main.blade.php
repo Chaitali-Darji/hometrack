@@ -9,6 +9,12 @@
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>{!! App::environment() != 'production' ? App::environment().' -- ' : '' !!}Hometrack</title>
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+    <style>
+        :root {
+            --theme_color: {{config('settings.theme_color')}};
+        }
+
+    </style>
   @include('layouts.auth.partials._head')
   </head>
   <!-- END: Head-->

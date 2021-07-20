@@ -1,23 +1,13 @@
-@if( Session::has( 'success' ))
-    <div class="alert alert-success alert-dismissible mb-2" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="d-flex align-items-center">
-          <span>
-            {{ Session::get( 'success' ) }}
-          </span>
-        </div>
-      </div>
-@elseif( Session::has( 'error' ))                         
-     <div class="alert alert-danger alert-dismissible mb-2" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <div class="d-flex align-items-center">
-          <span>
-            {{ Session::get( 'error' ) }}
-          </span>
-        </div>
-      </div>
-@endif
+<script>
+    var toptions = toastr.options = {
+        "closeButton": true,
+        "newestOnTop": true,
+        "positionClass": "toast-top-right"
+    };
+    @if( Session::has( 'success' ))
+    toastr.success("{{ Session::get( 'success' ) }}", toptions);
+    @elseif( Session::has( 'error' ))
+    toastr.error("{{ Session::get( 'error' ) }}", toptions);
+    @endif
+</script>
+

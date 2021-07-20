@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table zero-configuration" id="archive-list-datatable">
+    <table class="table dtable zero-configuration" id="archive-list-datatable">
         <thead>
         <tr>
             <th>Primary acount</th>
@@ -25,7 +25,7 @@
                 <td>
                     <a href="{{route('admin.archive.restore')}}" data-model="Client" data-archiveid="{{$archive->id}}"
                        class="restore">
-                        <i class="bx bx-reset mr-1"></i>
+                        <i class="bx bx-reset text-hena mr-1"></i>
                     </a>
                 </td>
             </tr>

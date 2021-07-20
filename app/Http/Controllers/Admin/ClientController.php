@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
 use App\Http\Controllers\BaseController;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Admin\ClientRequest;
-use App\Repositories\Client\ClientRepository;
-use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\ClientAddress;
+use App\Repositories\Client\ClientRepository;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Redirect;
 use Session;
+use View;
 
 class ClientController extends BaseController {
 
@@ -34,11 +34,14 @@ class ClientController extends BaseController {
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clients = $this->clientRepository->all();
+        if ($request->ajax()) {
+            $clients = $this->clientRepository->paginate();
+            return View::make('admin.clients.list', compact('clients'));
+        }
         $archive_data = $this->clientRepository->trashAll();
-        return view('admin.clients.index', compact('clients','archive_data'));
+        return view('admin.clients.index', compact('archive_data'));
     }
 
     /**
@@ -48,7 +51,9 @@ class ClientController extends BaseController {
      */
     public function create()
     {
-        return view('admin.clients.add-edit');
+        $clients = $this->client->get()->pluck('parent_display', 'id');
+
+        return view('admin.clients.edit', compact('clients'));
     }
 
     /**
@@ -58,8 +63,9 @@ class ClientController extends BaseController {
      */
     public function store(ClientRequest $clientRequest)
     {
-        $client = $this->clientRepository->create($clientRequest->client);
-        $this->clientAddress->create($clientRequest->address + ['type' => HOME_ADDRESS,'client_id' => $client->id]);
+        $data = $clientRequest->all();
+        $client = $this->clientRepository->create($data);
+        $this->clientAddress->create($data['address'] = ['type' => self::HOME_ADDRESS, 'client_id' => $client->id]);
         Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store',['module' => Client::MODULE_NAME]));
         return Redirect::route('clients.index');
     }
@@ -78,8 +84,8 @@ class ClientController extends BaseController {
         }
 
         $clients = $this->client->where('id','<>',$id)->orderBy('last_name')->get()->pluck('parent_display', 'id');
-        $address = $this->clientAddress->where(['type' => HOME_ADDRESS,'client_id' => $client->id])->first();
-        $billing_address = $this->clientAddress->where(['type' => BILLING_ADDRESS,'client_id' => $client->id])->first();
+        $address = $this->clientAddress->where(['type' => self::HOME_ADDRESS, 'client_id' => $client->id])->first();
+        $billing_address = $this->clientAddress->where(['type' => self::BILLING_ADDRESS, 'client_id' => $client->id])->first();
         
         return view('admin.clients.edit', compact('client','clients','address','billing_address'));
     }
@@ -93,10 +99,11 @@ class ClientController extends BaseController {
      */
     public function update($id, ClientRequest $clientRequest)
     {
-        if($this->clientRepository->update($id,$clientRequest->client)){
+        $data = $clientRequest->except(['_token', '_method', 'address', 'billing_address']);
+        if ($this->clientRepository->update($id, $data)) {
             $this->clientAddress->where('client_id',$id)->delete();
-            $this->clientAddress->create($clientRequest->address + ['type' => HOME_ADDRESS,'client_id' => $id]);
-            $this->clientAddress->create($clientRequest->billing_address + ['type' => BILLING_ADDRESS,'client_id' => $id]);
+            $this->clientAddress->create($clientRequest->address + ['type' => self::HOME_ADDRESS, 'client_id' => $id]);
+            $this->clientAddress->create($clientRequest->billing_address + ['type' => self::BILLING_ADDRESS, 'client_id' => $id]);
             Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => Client::MODULE_NAME]));
         }
         else{

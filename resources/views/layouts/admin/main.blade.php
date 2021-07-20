@@ -9,14 +9,20 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>{{config('settings.name') ?? ''}}</title>
-  
+    <style>
+        :root {
+            --theme_color: {{config('settings.theme_color')}};
+        }
+
+    </style>
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
   @include('layouts.admin.partials._head')
 </head>
 <!-- END: Head-->
 
   <!-- BEGIN: Body-->
-  <body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="horizontal-layout horizontal-menu navbar-static 2-columns   footer-static  " data-open="hover"
+      data-menu="horizontal-menu" data-col="2-columns">
 
     <!-- BEGIN: Header-->
       @include('layouts.admin.partials._header')

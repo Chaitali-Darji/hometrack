@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
 use App\Http\Controllers\BaseController;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Repositories\Setting\SettingRepository;
+use App\Http\Requests\Admin\SettingsRequest;
 use App\Models\Setting;
+use App\Repositories\Setting\SettingRepository;
+use Illuminate\Support\Str;
 use Redirect;
 use Session;
-use Illuminate\Support\Str;
 
 class SettingController extends BaseController {
 
@@ -35,7 +33,8 @@ class SettingController extends BaseController {
     }
 
 
-    public function changeSetting(Request $request){
+    public function changeSetting(SettingsRequest $request)
+    {
 
         foreach($request->setting as $key => $setting){
             $this->settingRepository->saveSetting($key,$setting);

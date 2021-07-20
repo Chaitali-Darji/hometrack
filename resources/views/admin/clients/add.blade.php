@@ -22,7 +22,7 @@
                                             <h1 class="card-title">Info</h1>
                                             <fieldset class="form-group">
                                                 {!! Form::label('name', 'First Name:') !!}
-                                                {!! Form::text('client[first_name]',null, array('class' => 'form-control required')) !!}
+                                                {!! Form::text('client[first_name]',null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('client.first_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -31,7 +31,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 {!! Form::label('last name', 'Last Name:') !!}
-                                                {!! Form::text('client[last_name]', null, array('class' => 'form-control required')) !!}
+                                                {!! Form::text('client[last_name]', null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('client.last_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 {!! Form::label('Brokerage', 'Brokerage:') !!}
-                                                {!! Form::text('client[brokerage]', null, array('class' => 'form-control required')) !!}
+                                                {!! Form::text('client[brokerage]', null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('client.brokerage')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 {!! Form::label('MRISID', 'MRISID:') !!}
-                                                {!! Form::text('client[mrisid]', null, array('class' => 'form-control required')) !!}
+                                                {!! Form::text('client[mrisid]', null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('client.mrisid')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 {!! Form::label('Mobile Phone', 'Mobile Phone:') !!}
-                                                {!! Form::text('client[mobile_phone]', null, array('class' => 'form-control phone-number required')) !!}
+                                                {!! Form::text('client[mobile_phone]', null, array('class' => 'form-control phone-number noSpace required')) !!}
                                                 @error('client.mobile_phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -67,7 +67,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 {!! Form::label('Office Phone', 'Office Phone:') !!}
-                                                {!! Form::text('client[office_phone]', null, array('class' => 'form-control phone-number required')) !!}
+                                                {!! Form::text('client[office_phone]', null, array('class' => 'form-control phone-number noSpace required')) !!}
                                                 @error('client.office_phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -76,7 +76,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 {!! Form::label('email', 'Email:') !!}<br/>
-                                                {!! Form::email('client[email]', null, array('class' => 'form-control required')) !!}
+                                                {!! Form::email('client[email]', null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('client.office_phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -85,7 +85,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 {!! Form::label('Team emails', 'Team Emails:') !!}<br/>
-                                                {!! Form::text('client[team_emails]', null, array('class' => 'form-control','data-role'=>"tagsinput",'id' => 'team-email-tag required')) !!}
+                                                {!! Form::text('client[team_emails]', null, array('class' => 'form-control','data-role'=>"tagsinput",'id' => 'team-email-tag noSpace required')) !!}
                                                 @error('client.team_emails')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -94,7 +94,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 {!! Form::label('Website', 'Website:') !!}<br/>
-                                                {!! Form::text('client[website]', null, array('class' => 'form-control required')) !!}
+                                                {!! Form::text('client[website]', null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('client.website]')
                                                 <span class="invalid-feedback" role="aler">
                                                     <strong>{{ $message }}</strong>
@@ -103,7 +103,7 @@
                                             </fieldset>
                                             <fieldset class="form-group">
                                                 {!! Form::label('Notes', 'Notes:') !!}<br/>
-                                                {!! Form::textarea('client[notes]', null, array('class' => 'form-control required')) !!}
+                                                {!! Form::textarea('client[notes]', null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('client.notes]')
                                                 <span class="invalid-feedback" role="aler">
                                                     <strong>{{ $message }}</strong>
@@ -118,7 +118,7 @@
                                             {!! Form::hidden('address[longitude]',null, array('id' => 'longitude')) !!}
                                             <fieldset class="form-group">
                                                 {!! Form::label('Address 1', 'Address 1:') !!}
-                                                {!! Form::text('address[address1]', null, array('class' => 'form-control','id' => 'address1 required')) !!}
+                                                {!! Form::text('address[address1]', null, array('class' => 'form-control','id' => 'address1 noSpace required')) !!}
                                                 @error('email_template[address1]')
                                                 <span class="invalid-feedback" role="alert">
                                                 @enderror

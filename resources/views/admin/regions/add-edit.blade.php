@@ -27,7 +27,7 @@
                                         <div class="col-md-6">
                                             <fieldset class="form-group">
                                                 {!! Form::label('name', 'Name:') !!}
-                                                {!! Form::text('region[name]', isset($region) ? $region->name : null, array('class' => 'form-control required')) !!}
+                                                {!! Form::text('region[name]', isset($region) ? $region->name : null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('region.name')
                                                 <span class="invalid-feedback" region="alert">
                                                   <strong>{{ $message }}</strong>

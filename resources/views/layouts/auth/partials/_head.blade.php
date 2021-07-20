@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/themes/dark-layout.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/themes/semi-dark-layout.min.css')}}">
 <!-- END: Theme CSS-->
+<link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/forms/validation/form-validation.css')}}">
 
 <!-- BEGIN: Page CSS-->
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/core/menu/menu-types/vertical-menu.min.css')}}">

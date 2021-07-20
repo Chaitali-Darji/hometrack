@@ -11,7 +11,7 @@ $(document).ready( function () {
     });
 
 
-    $('.active-role').on('change', function (event) {
+    $('.active-state').on('change', function (event) {
         event.preventDefault();
         statusChange($(this));
     });

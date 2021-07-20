@@ -1,13 +1,23 @@
-<div class="header-navbar-shadow"></div>
-<nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
+<nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-static-top navbar-brand-center">
+    <div class="navbar-header d-xl-block d-none">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item"><a class="navbar-brand" href="{{route('dashboard')}}">
+                    <div class="brand-logo"><img class="logo"
+                                                 src="{{ config('settings.admin_logo') ? asset(config('constants.SETTING_IMAGE_URL').config('settings.admin_logo')) : asset('admin/images/logo/hometrack_admin_logo.png')}}"
+                                                 alt="avatar" width="175">
+
+                    </div>
+                </a></li>
+        </ul>
+    </div>
     <div class="navbar-wrapper">
         <div class="navbar-container content">
             <div class="navbar-collapse" id="navbar-mobile">
                 <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
                     <ul class="nav navbar-nav">
-                        <li class="nav-item mobile-menu d-xl-none mr-auto"><a
-                                    class="nav-link nav-menu-main menu-toggle hidden-xs" href="javascript:void(0);"><i
-                                        class="ficon bx bx-menu"></i></a></li>
+                        <li class="nav-item mobile-menu mr-auto"><a class="nav-link nav-menu-main menu-toggle"
+                                                                    href="javascript:void(0);"><i
+                                        class="bx bx-menu"></i></a></li>
                     </ul>
                     <ul class="nav navbar-nav bookmark-icons">
                         <li class="nav-item d-none d-lg-block"><a class="nav-link" href="#" data-toggle="tooltip"

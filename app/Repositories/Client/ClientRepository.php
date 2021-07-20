@@ -3,8 +3,8 @@
 namespace App\Repositories\Client;
 
 use App\Models\Client;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;  
 
 class ClientRepository
 {
@@ -21,6 +21,13 @@ class ClientRepository
        return $this->model->get();    
     }
 
+    /**
+     * @return Collection
+     */
+    public function paginate()
+    {
+        return $this->model->paginate(config('constants.PAGINATE'));
+    }
     /**
     * @param array $attributes
     * @return Model

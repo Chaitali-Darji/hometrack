@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table" id="archive-services-datatable">
+    <table class="table dtable" id="archive-services-datatable">
     <thead>
       <tr>
         <th>Name</th>

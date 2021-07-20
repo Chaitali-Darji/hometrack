@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
         if(Schema::hasTable('settings')){
             config()->set('settings', \App\Models\Setting::pluck('value', 'key')->all());
         }
+        Paginator::useBootstrap();
     }
 }

@@ -27,7 +27,7 @@
                                         <div class="col-md-6">
                                             <fieldset class="form-group">
                                                 {!! Form::label('name', 'Name:') !!}
-                                                {!! Form::text('service_type[name]', isset($service_type) ? $service_type->name : null, array('class' => 'form-control required')) !!}
+                                                {!! Form::text('service_type[name]', isset($service_type) ? $service_type->name : null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('service_type.name')
                                                 <span class="invalid-feedback" state="alert">
                                                   <strong>{{ $message }}</strong>

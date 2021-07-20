@@ -1,5 +1,5 @@
 .swal-button--confirm{
-	background-color:  #39da8a !important;
+    background-color: var(--theme_color) !important;
 }
 
 .dataTable > thead > tr > th[class*="sort"]:before,
@@ -8,7 +8,7 @@
 }
 
 .label-info {
-    background-color: #39DA8A !important;
+    background-color: var(--theme_color) !important;
 	padding: 3px;
 }
 
@@ -43,4 +43,144 @@
 }
 .img-fluid, .img-thumbnail{
     width: 80%;
+}
+
+.form-label-group {
+    margin-bottom: 0 !important;
+}
+
+.pagination .page-item.previous {
+    margin-right: 0;
+    background: white !important;
+}
+
+.pagination .page-item.next {
+    margin-left: 0;
+    background: white !important;
+}
+
+.pagination .page-item.first.disabled .page-link, .pagination .page-item.last.disabled .page-link, .pagination .page-item.next.disabled .page-link, .pagination .page-item.previous.disabled .page-link {
+    background: white !important;
+}
+
+.pagination .page-item.first .page-link, .pagination .page-item.last .page-link, .pagination .page-item.next .page-link, .pagination .page-item.previous .page-link {
+    color: black !important;
+    padding: .47rem .73rem !important;
+}
+
+.pagination .disabled, .disabled a, :disabled, :disabled a {
+    color: black !important;
+}
+
+.horizontal-menu .navbar-expand-sm .navbar-nav > li.active > a, .horizontal-menu .navbar-expand-sm .navbar-nav > li.sidebar-group-active > a {
+    background-color: var(--theme_color);
+    border-radius: 4px;
+    color: white !important;
+}
+
+.nav-link.active {
+    background-color: var(--theme_color) !important;
+}
+
+.bg-hena {
+    background-color: var(--theme_color);
+    color: white !important;
+}
+
+.text-hena {
+    color: var(--theme_color);
+}
+
+.pagination .page-item.active .page-link, .pagination .page-item.active .page-link:hover {
+    border-radius: .267rem;
+    background-color: var(--theme_color) !important;
+    color: #FFF;
+}
+
+html .pace .pace-progress {
+    background: var(--theme_color);
+}
+
+.btn-hena {
+    border-color: var(--theme_color) !important;
+    background-color: var(--theme_color) !important;
+    color: #FFF;
+}
+
+.btn-hena:hover {
+    color: #FFF !important;
+    border-color: #39DA8A !important;
+    background-color: black !important;
+    text-decoration: none;
+}
+
+.form-control:focus {
+    color: #475F7B;
+    background-color: #FFF;
+    border-color: var(--theme_color);
+    outline: 0;
+    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
+}
+
+.form-control:focus ~ .form-control-position i, .header-navbar .navbar-container .bookmark-wrapper ul.nav li > a.nav-link i:hover {
+    color: var(--theme_color);
+}
+
+.toast-top-right {
+    margin-top: 65px;
+}
+
+.horizontal-menu .navbar-expand-sm .navbar-nav > li li:not(.sidebar-group-active).active a {
+    background: var(--theme_color) 29 !important;
+    color: var(--theme_color) !important;
+    border-left: 4px solid var(--theme_color);
+    padding-left: 1rem !important;
+}
+
+.horizontal-menu .navbar-expand-sm .navbar-nav > li li:not(.sidebar-group-active).active a i {
+    color: var(--theme_color);
+}
+
+.horizontal-menu .navbar-expand-sm .navbar-nav .dropdown.active .dropdown-toggle:after {
+    color: white !important;
+}
+
+.nav.nav-pills .nav-item .nav-link:not(.active):hover, .nav.nav-pills .nav-item .nav-link:not(.active):hover span, .nav.nav-pills .nav-item .nav-link:not(:active):hover, .nav.nav-pills .nav-item .nav-link:not(:active):hover span, .nav.nav-tabs .nav-item .nav-link:not(.active):hover, .nav.nav-tabs .nav-item .nav-link:not(.active):hover span, .nav.nav-tabs .nav-item .nav-link:not(:active):hover, .nav.nav-tabs .nav-item .nav-link:not(:active):hover span {
+    color: var(--theme_color);
+}
+
+.nav.nav-pills .nav-item .nav-link.active:hover, .nav.nav-pills .nav-item .nav-link.active:hover span, .nav.nav-tabs .nav-item .nav-link.active:hover, .nav.nav-tabs .nav-item .nav-link.active:hover span {
+    color: #FFF !important;
+}
+
+iframe .blockbuilder-branding {
+    display: none !important;
+}
+
+.pagination .page-item .page-link {
+    border: 1px solid #DFE3E7 !important;
+}
+
+.custom-switch-success .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--theme_color) !important;
+}
+
+.checkbox input:checked ~ label:after {
+    border-color: var(--theme_color) !important;
+}
+
+.dataTables_wrapper .dt-buttons {
+    position: absolute !important;
+}
+
+.dataTables_wrapper .dt-buttons .btn-secondary {
+    background-color: var(--theme_color) !important;
+}
+
+.nav-item a:hover {
+    background: #dbe1e361;
+}
+
+.header-navbar .navbar-container ul.nav li i.ficon:hover {
+    color: var(--theme_color) !important;
 }

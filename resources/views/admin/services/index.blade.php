@@ -33,7 +33,7 @@
         <div class="tab-content">
             <div class="tab-pane active" id="services-home" aria-labelledby="services-home-tab" role="tabpanel">
                 <div class="table-responsive">
-                    <table class="table" id="services-datatable">
+                    <table class="table dtable" id="services-datatable">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -62,7 +62,7 @@
                                         <i class="bx bx-trash mr-1"></i>
                                     </a>
 
-                                    <div class="custom-control custom-switch custom-switch-success mr-2 mb-1"
+                                    <div class="custom-control custom-switch custom-switch-success mr-2"
                                          style="display: inline-block;">
                                         <input type="checkbox" class="custom-control-input active-service"
                                                data-service_typeid="{{$service->id}}"

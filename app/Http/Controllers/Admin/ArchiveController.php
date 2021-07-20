@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Carbon\Carbon;
 use App\Http\Controllers\BaseController;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Redirect;
 use Session;
@@ -26,7 +24,7 @@ class ArchiveController extends BaseController {
         $archiveInfo->restore();
         return response()->json([
             'status' => config('constants.SUCCESS_STATUS'),
-            'message' => trans('response.restore',['module'=>$request->post('model')])
+            'message' => trans('response.restored', ['module' => $request->post('model')])
         ]);
     }
 }

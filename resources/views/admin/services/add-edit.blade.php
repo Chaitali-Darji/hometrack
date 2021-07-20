@@ -27,7 +27,7 @@
                                         <div class="col-md-6">
                                             <fieldset class="form-group">
                                                 {!! Form::label('name', 'Name:') !!}
-                                                {!! Form::text('service[name]', isset($service) ? $service->name : null, array('class' => 'form-control required')) !!}
+                                                {!! Form::text('service[name]', isset($service) ? $service->name : null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('service.name')
                                                 <span class="invalid-feedback" state="alert">
                                                   <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Service Type', 'Service Type:') !!}
-                                                {!! Form::select('service[service_type_id]', $service_types, isset($service) ? $service->service_type_id : null, array('class' => 'form-control required')) !!}
+                                                {!! Form::select('service[service_type_id]', $service_types, isset($service) ? $service->service_type_id : null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('service.service_type_id')
                                                 <span class="invalid-feedback" role="alert">
                                                       <strong>{{ $message }}</strong>
@@ -47,7 +47,7 @@
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Description', 'Description:') !!}
-                                                {!! Form::textarea('service[description]', isset($service) ? $service->description : null, array('class' => 'form-control required')) !!}
+                                                {!! Form::textarea('service[description]', isset($service) ? $service->description : null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('service.description')
                                                 <span class="invalid-feedback" role="alert">
                                                       <strong>{{ $message }}</strong>
@@ -67,7 +67,7 @@
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Display Section', 'Display Section:') !!}
-                                                {!! Form::select('service[display_section]', ['photography','listing','marketing','none'], isset($service) ? $service->display_section : null, array('class' => 'form-control required')) !!}
+                                                {!! Form::select('service[display_section]', ['photography','listing','marketing','none'], isset($service) ? $service->display_section : null, array('class' => 'form-control noSpace required')) !!}
                                                 @error('service.display_section')
                                                 <span class="invalid-feedback" role="alert">
                                                       <strong>{{ $message }}</strong>
@@ -111,8 +111,8 @@
                                                                 </div>
                                                                 <div class="col-md-4 col-sm-12 form-group">
 
-                                                                    {!! Form::label('Description', 'Description:') !!}                                                                
-                                                                    {!! Form::text('check_lists[description][]', null, array('class' => 'form-control required')) !!}
+                                                                    {!! Form::label('Description', 'Description:') !!}
+                                                                    {!! Form::text('check_lists[description][]', null, array('class' => 'form-control noSpace required')) !!}
                                                                 </div>
                                                                 <div
                                                                     class="col-md-4 col-sm-12 form-group d-flex align-items-center pt-2">
@@ -149,8 +149,8 @@
                                                                 </div>
                                                                 <div class="col-md-4 col-sm-12 form-group">
 
-                                                                    {!! Form::label('Description', 'Description:') !!}                                                                
-                                                                    {!! Form::text('check_lists[description][]', $check_lists->description, array('class' => 'form-control required')) !!}
+                                                                    {!! Form::label('Description', 'Description:') !!}
+                                                                    {!! Form::text('check_lists[description][]', $check_lists->description, array('class' => 'form-control noSpace required')) !!}
                                                                 </div>
                                                                 <div
                                                                     class="col-md-4 col-sm-12 form-group d-flex align-items-center pt-2">

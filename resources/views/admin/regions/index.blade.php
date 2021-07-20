@@ -30,7 +30,7 @@
             <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
                 
                 <div class="table-responsive">
-                    <table class="table" id="regions-datatable">
+                    <table class="table dtable" id="regions-datatable">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -51,7 +51,7 @@
                                         <i class="bx bx-trash mr-1"></i>
                                     </a>
 
-                                    <div class="custom-control custom-switch custom-switch-success mr-2 mb-1"
+                                    <div class="custom-control custom-switch custom-switch-success mr-2"
                                          style="display: inline-block;">
                                         <input type="checkbox" class="custom-control-input active-region"
                                                data-regionid="{{$region->id}}" id="customSwitchcolor{{$region->id}}"

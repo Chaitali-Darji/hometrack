@@ -17,7 +17,7 @@
 <!-- END: Theme CSS-->
 
 <!-- BEGIN: Page CSS-->
-<link rel="stylesheet" type="text/css" href="{{asset('admin/css/core/menu/menu-types/vertical-menu.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('admin/css/core/menu/menu-types/horizontal-menu.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/forms/validation/form-validation.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/pages/dashboard-ecommerce.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/ui/prism.min.css')}}">

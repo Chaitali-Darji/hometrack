@@ -14,9 +14,10 @@
               <div class="card-title w100">
                 <div class="row">
                   <div class="col-md-6">
-                        <h4 class="card-title">Users</h4>
+                      <h4 class="card-title text-hena">Users</h4>
                   </div>
-                  <div class="col-md-6"><a href="{{route('users.create')}}" class="btn round btn-primary pull-right">Add</a></div>
+                    <div class="col-md-6"><a href="{{route('users.create')}}"
+                                             class="btn round btn-hena pull-right">Add</a></div>
                 </div>
               </div>
             </div>
@@ -37,42 +38,46 @@
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
-                  @include('admin.partials._session-message')
+
                   
                     <div class="table-responsive">
-                      <table class="table zero-configuration" id="users-list-datatable">
+                        <table class="table dtable zero-configuration" id="users-list-datatable">
                         <thead>
                           <tr>
+                              <th>Name</th>
                             <th>Email</th>
-                            @foreach($roles as $key=>$role)
-                            <th>{{$role}}</th>
-                            @endforeach
+                              <th>Roles</th>
+                              <th>Created Date</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach($users as $user)
                             <tr>
-                              <td class="text-bold-500">{{ $user->email }}</td>
-                              @foreach($roles as $key=>$role)
-                              <td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+
+                                <td>
+                                    @foreach($roles as $key=>$role)
                                   @if(!empty($user->roles))
                                       @if (array_search($key, array_column($user->roles->toArray(), 'id')) !== FALSE)
-                                          <i class="bx bx-check font-medium-1"></i>
+                                                {{$role}},
                                       @endif
                                   @endif
+                                    @endforeach
                               </td>
-                              @endforeach
+                                <td>{{ format_date($user->created_at) }}</td>
                               <td>
                                   <a href="{{route('users.edit',$user->id)}}">
-                                      <i class="bx bx-edit-alt mr-1"></i>
+                                      <i class="bx bx-edit-alt text-hena mr-1"></i>
                                   </a>
 
                                   <a href="{{route('users.destroy',$user->id)}}" data-userid="{{$user->id}}" class="delete-confirm">
-                                      <i class="bx bx-trash mr-1"></i>
+                                      <i class="bx bx-trash text-danger mr-1"></i>
                                   </a>
 
-                                  <div class="custom-control custom-switch custom-switch-success mr-2 mb-1" style="display: inline-block;">
+                                  <div class="custom-control custom-switch custom-switch-success mr-2"
+                                       style="display: inline-block;">
                                     <input type="checkbox" class="custom-control-input active-user" data-userid= "{{$user->id}}" id="customSwitchcolor{{$user->id}}" data-url="{{route('admin.users.active-inactive',$user->id)}}" @if($user->is_active) checked @endif>
                                     <label class="custom-control-label" for="customSwitchcolor{{$user->id}}" ></label>
                                   </div>
@@ -85,8 +90,7 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
-                  @include('admin.partials._session-message')
-                  @include('admin.users.archive-list')                  
+                    @include('admin.users.archive-list')
                 </div>
               </div>
             </div>
@@ -99,5 +103,6 @@
 @endsection
 
 @section('page-script')
+    @include('admin.partials._session-message')
     <script src="{{asset('admin/js/scripts/pages/users/list.js')}}"></script>
 @endsection

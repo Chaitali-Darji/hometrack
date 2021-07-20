@@ -1,5 +1,5 @@
 $(document).ready( function () {
-    
+    generateDatatable($('#roles-datatable'));
     $('.delete-confirm').on('click', function (event) {
         event.preventDefault();
         datatableDelete($(this));

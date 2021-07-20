@@ -17,20 +17,23 @@
                     </div>
                     <div class="card-body">
                      @include('admin.partials._session-message')
-
+                        @if($errors->any())
+                            {{ implode('', $errors->all('<div>:message</div>')) }}
+                        @endif
                       @if(isset($client))
                          {!! Form::model($client, array('route' => array('clients.update', $client->id))) !!}
                          {{ method_field('PATCH') }}
                          {!! Form::hidden('id', isset($client) ? $client->id : null) !!}
                       @else
                         {!! Form::open(array('route' => 'clients.store', 'autocomplete' => 'off', 'id' => 'jquery-client-form')) !!}
+                            {{ method_field('POST') }}
                       @endif    
                           <div class="row">
                             <div class="col-md-4">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'First Name:') !!}
-                                {!! Form::text('client[first_name]', isset($client) ? $client->first_name : null, array('class' => 'form-control')) !!}
-                                 @error('client[first_name]')
+                                  {!! Form::text('first_name', isset($client) ? $client->first_name : null, array('class' => 'form-control')) !!}
+                                  @error('first_name')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -40,8 +43,8 @@
                             <div class="col-md-4">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Last Name:') !!}
-                                {!! Form::text('client[last_name]', isset($client) ? $client->last_name : null, array('class' => 'form-control')) !!}
-                                 @error('client[last_name]')
+                                  {!! Form::text('last_name', isset($client) ? $client->last_name : null, array('class' => 'form-control')) !!}
+                                  @error('last_name')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -51,8 +54,8 @@
                               <div class="col-md-4">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Brokerage:') !!}
-                                {!! Form::text('client[brokerage]', isset($client) ? $client->brokerage : null, array('class' => 'form-control')) !!}
-                                 @error('client[brokerage]')
+                                  {!! Form::text('brokerage', isset($client) ? $client->brokerage : null, array('class' => 'form-control')) !!}
+                                  @error('brokerage')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -67,8 +70,8 @@
 
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'MRISID:') !!}
-                                {!! Form::text('client[brokerage]', isset($client) ? $client->brokerage : null, array('class' => 'form-control')) !!}
-                                 @error('client[brokerage]')
+                                  {!! Form::text('mrisid', isset($client) ? $client->brokerage : null, array('class' => 'form-control')) !!}
+                                  @error('mrisid')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -78,8 +81,8 @@
                             <div class="col-md-4">
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Mobile Phone:') !!}
-                                {!! Form::text('client[mobile_phone]', isset($client) ? $client->mobile_phone : null, array('class' => 'form-control')) !!}
-                                 @error('client[mobile_phone]')
+                                  {!! Form::text('mobile_phone', isset($client) ? $client->mobile_phone : null, array('class' => 'form-control')) !!}
+                                  @error('mobile_phone')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
                                       </span>
@@ -90,7 +93,7 @@
 
                               <fieldset class="form-group">
                                 {!! Form::label('name', 'Office Phone:') !!}
-                                {!! Form::text('client[office_phone]', isset($client) ? $client->office_phone : null, array('class' => 'form-control')) !!}
+                                  {!! Form::text('office_phone', isset($client) ? $client->office_phone : null, array('class' => 'form-control')) !!}
                                  @error('client[office_phone]')
                                       <span class="invalid-feedback" role="alert">
                                           <strong>{{ $message }}</strong>
@@ -105,7 +108,7 @@
 
                                <fieldset class="form-group">
                                 {!! Form::label('email', 'Email:') !!}<br/>
-                                {!! Form::email('client[email]',  isset($user) ? $user->email : null, array('class' => 'form-control')) !!}
+                                   {!! Form::email('email',  isset($user) ? $user->email : null, array('class' => 'form-control')) !!}
                                 @error('client[office_phone]')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -117,7 +120,7 @@
                             <div class="col-md-4">
                               <fieldset class="form-group">
                                 {!! Form::label('password', 'Website:') !!}<br/>
-                                {!! Form::text('client[website]',  isset($user) ? $user->website : null, array('class' => 'form-control')) !!}
+                                  {!! Form::text('website',  isset($user) ? $user->website : null, array('class' => 'form-control')) !!}
                                 @error('client[website]')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -128,8 +131,8 @@
                             <div class="col-md-4">
                                 <fieldset class="form-group">
                                     {!! Form::label('email', 'Team Emails:') !!}<br/>
-                                    {!! Form::text('client[team_emails]',  isset($user) ? $user->team_emails : null, array('class' => 'form-control','data-role'=>"tagsinput",'id' => 'team-email-tag')) !!}
-                                    @error('client[team_emails]')
+                                    {!! Form::text('team_emails',  isset($user) ? $user->team_emails : null, array('class' => 'form-control','data-role'=>"tagsinput",'id' => 'team-email-tag')) !!}
+                                    @error('team_emails')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -142,8 +145,8 @@
 
                               <fieldset class="form-group">
                                 {!! Form::label('password', 'Notes:') !!}<br/>
-                                {!! Form::textarea('client[notes]',  isset($user) ? $user->notes : null, array('class' => 'form-control','rows'=>3)) !!}
-                                @error('client[notes]')
+                                  {!! Form::textarea('notes',  isset($user) ? $user->notes : null, array('class' => 'form-control','rows'=>3)) !!}
+                                  @error('notes')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

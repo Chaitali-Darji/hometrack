@@ -11,58 +11,81 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">User Add/Edit</h4>
+                                    <h4 class="card-title">{{(isset($user)) ? 'Edit'  : 'Create'}} User</h4>
+                                    {!! link_to_route('users.index', 'Back', null, array('class' => 'btn btn-dark round pull-right')) !!}
+
                                 </div>
                                 <div class="card-body">
-                                    @include('admin.partials._session-message')
+
 
                                     @if(isset($user))
-                                        {!! Form::model($user, array('route' => array('users.update', $user->id), 'class' => 'jquery-validate-form')) !!}
+                                        {!! Form::model($user, array('route' => array('users.update', $user->id), 'class' => 'validate-form')) !!}
                                         {{ method_field('PATCH') }}
                                         {!! Form::hidden('id', isset($user) ? $user->id : null) !!}
 
                                     @else
-                                        {!! Form::open(array('route' => 'users.store', 'autocomplete' => 'off', 'id' => 'jquery-user-form', 'class' => 'jquery-validate-form')) !!}
+                                        {!! Form::open(array('route' => 'users.store', 'autocomplete' => 'off', 'id' => 'validate-form', 'class' => 'jquery-validate-form')) !!}
                                         {{ method_field('POST ') }}
                                     @endif
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <fieldset class="form-group">
                                                 {!! Form::label('name', 'Name:') !!}
-                                                {!! Form::text('user[name]', isset($user) ? $user->name : null, array('class' => 'form-control required')) !!}
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('user[name]', isset($user) ? $user->name : null, array('class' => 'form-control noSpace required','placeholder'=>'Enter Name')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-user-account"></i>
+                                                    </div>
                                                 @error('user.name')
                                                 <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
+                                                  <strong>{{ $message }}</strong>
+                                                </span>
                                                 @enderror
+                                                </div>
                                             </fieldset>
-
+                                        </div>
+                                        <div class="col-md-4">
                                             <fieldset class="form-group">
                                                 {!! Form::label('email', 'Email:') !!}<br/>
-                                                {!! Form::email('user[email]',  isset($user) ? $user->email : null, array('class' => 'form-control required')) !!}
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::email('user[email]',  isset($user) ? $user->email : null, array('class' => 'form-control email noSpace required','placeholder'=>'Enter Email')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-mail-send"></i>
+                                                    </div>
                                                 @error('user.email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
+                                                </div>
                                             </fieldset>
-
+                                        </div>
+                                        <div class="col-md-4">
                                             <fieldset class="form-group">
                                                 {!! Form::label('password', 'Password:') !!}<br/>
-                                                {{ Form::password('user[password]', array('id' => 'password', "class" => "form-control")) }}
-                                                @error('user.password')
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {{ Form::password('user[password]', array('id' => 'password', "class" => "form-control noSpace required","minlength"=>8,'placeholder'=>'Enter Password')) }}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-lock"></i>
+                                                    </div>
+                                                    @error('user.password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
+                                                </div>
                                             </fieldset>
-
+                                        </div>
+                                        <div class="col-md-4">
                                             <fieldset class="form-group">
-                                                {!! Form::label('roles', 'Roles:') !!}<br/>
+                                                {!! Form::label('role', 'Roles:') !!}<br/>
                                             </fieldset>
+                                        </div>
+
+                                        <div class="col-md-12 row">
 
                                             @foreach($roles as $key => $role)
-                                                <fieldset class="form-group">
+                                                <fieldset class="form-group col-md-2">
                                                     <div class="checkbox">
                                                         {!! Form::checkbox('roles[]', $key, (isset($user) && array_search($key, array_column($user->roles->toArray(), 'id')) !== FALSE) ? true : false, array('class' => 'checkbox-input', 'id' => 'checkbox'.$key)) !!}
                                                         <label for="checkbox{{$key}}">{{$role}}</label>
@@ -72,9 +95,8 @@
 
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        {!! Form::submit('Submit', array('class' => 'btn round btn-primary')) !!}
-                                        {!! link_to_route('users.index', 'Cancel', null, array('class' => 'btn')) !!}
+                                    <div class="row pull-right">
+                                        <button type="submit" class="btn round btn-hena">Submit</button>
                                     </div>
                                     {!! Form::close() !!}
                                 </div>
@@ -90,5 +112,6 @@
 @endsection
 
 @section('page-script')
+    @include('admin.partials._session-message')
     <script src="{{asset('admin/js/scripts/pages/users/add-edit.js')}}"></script>
 @endsection

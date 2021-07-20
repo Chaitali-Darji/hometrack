@@ -5,21 +5,31 @@
     <div class="app-content content">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
             <div class="content-body">
                 <section id="basic-input">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Client Edit</h4>
+                                    <h4 class="card-title text-hena">{{(isset($client) ? 'Edit' : 'Create')}}
+                                        Client </h4>
+                                    {!! link_to_route('clients.index', 'Back', null, array('class' => 'btn btn-dark round mr-1 mb-1')) !!}
+
                                 </div>
                                 <div class="card-body">
-                                    @include('admin.partials._session-message')
 
-                                    {!! Form::model($client, array('route' => array('clients.update', $client->id))) !!}
-                                    {{ method_field('PATCH') }}
-                                    {!! Form::hidden('id', isset($client) ? $client->id : null) !!}
 
+                                    @if(isset($client))
+                                        {!! Form::model($client, array('route' => array('clients.update', $client->id),'id' => 'validate-form')) !!}
+                                        {{ method_field('PATCH') }}
+                                        {!! Form::hidden('id', isset($client) ? $client->id : null) !!}
+                                    @else
+                                        {!! Form::open(['route' => 'clients.store', 'autocomplete' => 'off', 'id' => 'validate-form', 'class' => 'jquery-validate-form']) !!}
+                                        {{ method_field('POST') }}
+
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-6">
 
@@ -27,133 +37,164 @@
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Primary Account', 'Primary Account:') !!}
-                                                {!! Form::select('client[primary_account_id]',['' => 'Select Primary Account']+$clients->toArray(),isset($client) ? $client->primary_account_id : null, array('class' => 'form-control')) !!}
-                                                @error('client[primary_account_id]')
-                                                <span class="invalid-feedback" role="alert">
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::select('primary_account_id',['' => 'Select Primary Account']+$clients->toArray(),isset($client) ? $client->primary_account_id : null, array('class' => 'form-control','autofocus'=>'autofocus')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-user-circle"></i>
+                                                    </div>
+                                                    @error('primary_account_id')
+                                                    <span class="invalid-feedback" role="alert"></span>
                                                 @enderror
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('first name', 'First Name:') !!}
-                                                {!! Form::text('client[first_name]', isset($client) ? $client->first_name : null, array('class' => 'form-control')) !!}
-                                                @error('client[first_name]')
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('first_name', isset($client) ? $client->first_name : null, array('class' => 'form-control noSpace required','placeholder'=>'Enter First Name','tab'=>1)) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-user"></i>
+                                                    </div>
+                                                    @error('first_name')
                                                 <span class="invalid-feedback" role="alert">
                                                   <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('last name', 'Last Name:') !!}
-                                                {!! Form::text('client[last_name]', isset($client) ? $client->last_name : null, array('class' => 'form-control')) !!}
-                                                @error('client[last_name]')
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('last_name', isset($client) ? $client->last_name : null, array('class' => 'form-control noSpace required','placeholder'=>'Enter Last Name','tab'=>2)) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-user"></i>
+                                                    </div>
+                                                    @error('last_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                                 @enderror
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Brokerage', 'Brokerage:') !!}
-                                                {!! Form::text('client[brokerage]', isset($client) ? $client->brokerage : null, array('class' => 'form-control')) !!}
-                                                @error('client[brokerage]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('brokerage', isset($client) ? $client->brokerage : null, array('class' => 'form-control ','placeholder'=>'Enter Brokerage','tab'=>3)) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-note"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Office/Brokerage Code:', 'Office/Brokerage Code:') !!}
-                                                {!! Form::text('client[brokerage_code]', isset($client) ? $client->brokerage_code : null, array('class' => 'form-control')) !!}
-                                                @error('client[brokerage_code]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('brokerage_code', isset($client) ? $client->brokerage_code : null, array('class' => 'form-control','placeholder'=>'Enter Brokerage Code','tab'=>4)) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-coupon"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Team/Group Name:', 'Team/Group Name:') !!}
-                                                {!! Form::text('client[team_name]', isset($client) ? $client->team_name : null, array('class' => 'form-control')) !!}
-                                                @error('client[team_name]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('team_name', isset($client) ? $client->team_name : null, array('class' => 'form-control','placeholder'=>'Enter Team Name','tab'=>5)) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-group"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('MRISID', 'MRISID:') !!}
-                                                {!! Form::text('client[mrisid]', isset($client) ? $client->mrisid : null, array('class' => 'form-control')) !!}
-                                                @error('client[mrisid]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('mrisid', isset($client) ? $client->mrisid : null, array('class' => 'form-control','placeholder'=>'Enter MRSID','tab'=>6)) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-notepad"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Mobile Phone', 'Mobile Phone:') !!}
-                                                {!! Form::text('client[mobile_phone]', isset($client) ? $client->mobile_phone : null, array('class' => 'form-control phone-number')) !!}
-                                                @error('client[mobile_phone]')
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('mobile_phone', isset($client) ? $client->mobile_phone : null, array('class' => 'form-control noSpace required phone-number','minlength'=>10,'placeholder'=>'Enter Mobile Number','tab'=>7)) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-phone"></i>
+                                                    </div>
+                                                    @error('mobile_phone')
                                                 <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
+                                                      <strong>{{ $message }}</strong>
+                                                  </span>
                                                 @enderror
+
+                                                </div>
                                             </fieldset>
 
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Office Phone', 'Office Phone:') !!}
-                                                {!! Form::text('client[office_phone]', isset($client) ? $client->office_phone : null, array('class' => 'form-control phone-number')) !!}
-                                                @error('client[office_phone]')
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('office_phone', isset($client) ? $client->office_phone : null, array('class' => 'form-control noSpace required phone-number','minlength'=>10,'placeholder'=>'Enter Office Number','tab'=>8)) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-phone"></i>
+                                                    </div>
+                                                    @error('office_phone')
                                                 <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                                 @enderror
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Email', 'Email:') !!}<br/>
-                                                {!! Form::email('client[email]',  isset($client) ? $client->email : null, array('class' => 'form-control')) !!}
-                                                @error('client[office_phone]')
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::email('email',  isset($client) ? $client->email : null, array('class' => 'form-control noSpace required email','placeholder'=>'Enter Email','tab'=>9)) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-mail-send"></i>
+                                                    </div>
+                                                    @error('email')
                                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                                 @enderror
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Team Emails', 'Team Emails:') !!}<br/>
-                                                {!! Form::text('client[team_emails]',  isset($client) ? $client->team_emails : null, array('class' => 'form-control','data-role'=>"tagsinput",'id' => 'team-email-tag')) !!}
-                                                @error('client[team_emails]')
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('team_emails',  isset($client) ? $client->team_emails : null, array('class' => 'form-control','data-role'=>"tagsinput",'id' => 'team-email-tag','placeholder'=>'Enter Team Emails')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxl-mail-send"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Website', 'Website:') !!}<br/>
-                                                {!! Form::text('client[website]',  isset($client) ? $client->website : null, array('class' => 'form-control')) !!}
-                                                @error('client[website]')
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('website',  isset($client) ? $client->website : null, array('class' => 'form-control','placeholder'=>'Enter Website')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-globe"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
-
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Notes', 'Notes:') !!}<br/>
-                                                {!! Form::textarea('client[notes]',  isset($client) ? $client->notes : null, array('class' => 'form-control')) !!}
-                                                @error('client[notes]')
-                                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::textarea('notes',  isset($client) ? $client->notes : null, array('class' => 'form-control','rows'=>10,'placeholder'=>'Enter Notes')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-notepad"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
+
 
                                         </div>
 
@@ -166,154 +207,158 @@
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Address 1', 'Address 1:') !!}
-                                                {!! Form::text('address[address1]', isset($address) ? $address->address1 : null, array('class' => 'form-control','id' => 'address1')) !!}
-                                                @error('client[address1]')
-                                                <span class="invalid-feedback" role="alert">
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('address[address1]', isset($address) ? $address->address1 : null, array('class' => 'form-control','id' => 'address1' ,'placeholder'=>'Enter Address Line 1')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-map"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Address 2', 'Address 2:') !!}
-                                                {!! Form::text('address[address2]', isset($address) ? $address->address2 : null, array('class' => 'form-control','id' => 'address2')) !!}
-                                                @error('address[address2]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('address[address2]', isset($address) ? $address->address2 : null, array('class' => 'form-control','id' => 'address2','placeholder'=>'Enter Address Line 2')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-map"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('City', 'City:') !!}
-                                                {!! Form::text('address[city]', isset($address) ? $address->city : null, array('class' => 'form-control','id' => 'city')) !!}
-                                                @error('address[city]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('address[city]', isset($address) ? $address->city : null, array('class' => 'form-control','id' => 'city','placeholder'=>'Enter City')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-city"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('State', 'State:') !!}
-                                                {!! Form::text('address[state]', isset($address) ? $address->state : null, array('class' => 'form-control','id' => 'state')) !!}
-                                                @error('address[state]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('address[state]', isset($address) ? $address->state : null, array('class' => 'form-control','id' => 'state','placeholder'=>'Enter State')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-city"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('ZIP', 'ZIP:') !!}
-                                                {!! Form::text('address[zip]', isset($address) ? $address->zip : null, array('class' => 'form-control','id' => 'zip')) !!}
-                                                @error('address[zip]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('address[zip]', isset($address) ? $address->zip : null, array('class' => 'form-control','id' => 'zip','placeholder'=>'Enter Zip')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-pin"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
-
+                                            <hr>
                                             <h1 class="card-title">Billing Address</h1>
-
+                                            <hr>
                                             {!! Form::hidden('billing_address[latitude]', isset($billing_address) ? $billing_address->latitude : null, array('id' => 'billing_latitude')) !!}
                                             {!! Form::hidden('billing_address[longitude]', isset($billing_address) ? $billing_address->longitude : null, array('id' => 'billing_longitude')) !!}
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Address 1', 'Address 1:') !!}
-                                                {!! Form::text('billing_address[address1]',  isset($billing_address) ? $billing_address->address1 : null, array('class' => 'form-control','id' => 'billing_address1')) !!}
-                                                @error('client[address1]')
-                                                <span class="invalid-feedback" role="alert">
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('billing_address[address1]',  isset($billing_address) ? $billing_address->address1 : null, array('class' => 'form-control','id' => 'billing_address1','placeholder'=>'Enter Address Line 1')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-map"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Address 2', 'Address 2:') !!}
-                                                {!! Form::text('billing_address[address2]',  isset($billing_address) ? $billing_address->address2 : null, array('class' => 'form-control','id' => 'billing_address2')) !!}
-                                                @error('billing_address[address2]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('billing_address[address2]',  isset($billing_address) ? $billing_address->address2 : null, array('class' => 'form-control','id' => 'billing_address2','placeholder'=>'Enter Address Line 2')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-map"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('City', 'City:') !!}
-                                                {!! Form::text('billing_address[city]',  isset($billing_address) ? $billing_address->city : null, array('class' => 'form-control','id' => 'billing_city')) !!}
-                                                @error('billing_address[city]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('billing_address[city]',  isset($billing_address) ? $billing_address->city : null, array('class' => 'form-control','id' => 'billing_city','placeholder'=>'Enter City')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-city"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('State', 'State:') !!}
-                                                {!! Form::text('billing_address[state]',  isset($billing_address) ? $billing_address->state : null, array('class' => 'form-control','id' => 'billing_state')) !!}
-                                                @error('billing_address[state]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('billing_address[state]',  isset($billing_address) ? $billing_address->state : null, array('class' => 'form-control','id' => 'billing_state','placeholder'=>'Enter State')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxs-city"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('ZIP', 'ZIP:') !!}
-                                                {!! Form::text('billing_address[zip]',  isset($billing_address) ? $billing_address->zip : null, array('class' => 'form-control','id' => 'billing_zip')) !!}
-                                                @error('billing_address[zip]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('billing_address[zip]',  isset($billing_address) ? $billing_address->zip : null, array('class' => 'form-control','id' => 'billing_zip','placeholder'=>'Enter Zip')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bx-pin"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <h1 class="card-title">SOCIAL MEDIA</h1>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Instagram', 'Instagram:') !!}
-                                                {!! Form::text('client[instagram_url]', isset($client) ? $client->instagram_url : null, array('class' => 'form-control')) !!}
-                                                @error('client[instagram_url]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('instagram_url', isset($client) ? $client->instagram_url : null, array('class' => 'form-control','placeholder'=>'Enter Instagram Link')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxl-instagram"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('Facebook', 'Facebook:') !!}
-                                                {!! Form::text('client[facebook_url]', isset($client) ? $client->facebook_url : null, array('class' => 'form-control')) !!}
-                                                @error('client[facebook_url]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('facebook_url', isset($client) ? $client->facebook_url : null, array('class' => 'form-control','placeholder'=>'Enter Facebook Link')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxl-facebook"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('LinkedIn:', 'LinkedIn:') !!}
-                                                {!! Form::text('client[linkedin_url]', isset($client) ? $client->linkedin_url : null, array('class' => 'form-control')) !!}
-                                                @error('client[linkedin_url]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('linkedin_url', isset($client) ? $client->linkedin_url : null, array('class' => 'form-control','placeholder'=>'Enter Linkedin Link')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxl-linkedin"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                             <fieldset class="form-group">
                                                 {!! Form::label('YouTube:', 'YouTube:') !!}
-                                                {!! Form::text('client[youtube_url]', isset($client) ? $client->youtube_url : null, array('class' => 'form-control')) !!}
-                                                @error('client[youtube_url]')
-                                                <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                      </span>
-                                                @enderror
+                                                <div class="form-label-group position-relative has-icon-left">
+                                                    {!! Form::text('youtube_url', isset($client) ? $client->youtube_url : null, array('class' => 'form-control','placeholder'=>'Enter Youtube Link')) !!}
+                                                    <div class="form-control-position">
+                                                        <i class="bx bxl-youtube"></i>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                         </div>
+
                                     </div>
-                                    <div class="row">
-                                        {!! Form::submit('Submit', array('class' => 'btn round btn-primary')) !!}
-                                        {!! link_to_route('clients.index', 'Cancel', null, array('class' => 'btn')) !!}
+                                    <div class="row pull-right">
+                                        <button type="submit" class="btn pull-right round btn-hena">Submit</button>
                                     </div>
                                     {!! Form::close() !!}
                                 </div>
@@ -329,7 +374,8 @@
 
 @section('page-script')
     <script src="{{asset('admin/js/scripts/pages/clients/add-edit.js')}}"></script>
+
     <script
-        src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initAutocomplete&libraries=places&v=weekly"
-        async></script>
+            src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_API_KEY')}}&callback=initAutocomplete&libraries=places&v=weekly"
+            async></script>
 @endsection

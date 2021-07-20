@@ -14,10 +14,10 @@
                             <div class="card-title w100">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h4 class="card-title">Sales Tax</h4>
+                                        <h4 class="card-title text-hena">Sales Tax</h4>
                                     </div>
                                     <div class="col-md-6"><a href="{{route('sales-tax.create')}}"
-                                                             class="btn round btn-primary pull-right">Add</a></div>
+                                                             class="btn round btn-hena pull-right">Add</a></div>
                                 </div>
                             </div>
                         </div>
@@ -40,37 +40,37 @@
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
-                                    @include('admin.partials._session-message')
+
 
                                     <div class="table-responsive">
-                                        <table class="table" id="sales-tax-datatable">
+                                        <table class="table dtable" id="sales-tax-datatable">
                                             <thead>
                                             <tr>
                                                 <th>State</th>
                                                 <th>Percentage</th>
-                                                <th>Action</th>
+                                                <th width="15%">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             @foreach($salestaxes as $salestax)
                                                 <tr>
-                                                    <td>{{ ($salestax->state) ? $salestax->state->name : null}}</td>
+                                                    <td>{{ ($salestax->state) ? $salestax->state->name : config('constants.NA')}}</td>
                                                     <td>
                                                         {{ $salestax->tax }}%
                                                     </td>
                                                     <td>
                                                         <a href="{{route('sales-tax.edit',$salestax->id)}}">
-                                                            <i class="bx bx-edit-alt mr-1"></i>
+                                                            <i class="bx text-hena bx-edit-alt mr-1"></i>
                                                         </a>
 
                                                         <a href="{{route('sales-tax.destroy',$salestax->id)}}"
                                                            data-salestaxid="{{$salestax->id}}" class="delete-confirm">
-                                                            <i class="bx bx-trash mr-1"></i>
+                                                            <i class="bx text-danger bx-trash mr-1"></i>
                                                         </a>
 
                                                         <div
-                                                            class="custom-control custom-switch custom-switch-success mr-2 mb-1"
-                                                            style="display: inline-block;">
+                                                                class="custom-control custom-switch custom-switch-success mr-2"
+                                                                style="display: inline-block;">
                                                             <input type="checkbox"
                                                                    class="custom-control-input active-salestax"
                                                                    data-salestaxid="{{$salestax->id}}"
@@ -89,7 +89,6 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
-                                    @include('admin.partials._session-message')
                                     @include('admin.sales-tax.archive-list')
                                 </div>
                             </div>
@@ -103,5 +102,6 @@
 @endsection
 
 @section('page-script')
+    @include('admin.partials._session-message')
     <script src="{{asset('admin/js/scripts/pages/sales-tax/list.js')}}"></script>
 @endsection

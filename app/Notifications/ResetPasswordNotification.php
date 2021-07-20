@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -51,8 +50,7 @@ class ResetPasswordNotification extends Notification
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));
 
-        $url = '<a target="_blank" style="text-decoration:none; background-color: black; border: black 1px solid; color: #fff; padding:10px 10px; display:block;" href="'.$url.'">
-                  <strong>Reset Password</strong></a>';
+        $url = '<a target="_blank" href="' . $url . '">Reset Password</a>';
                   
         $this->content = str_replace('[reset-password-link]', !empty($url) ? $url : "", $this->content);  
 
