@@ -39,4 +39,12 @@ class Service extends Model
     {
         return $this->hasOne(ServiceType::class,'id','service_type_id');
     }
+
+    /**
+     * The service has many images
+     */
+    public function photos()
+    {
+        return $this->hasMany(ServicePhoto::class, 'service_id', 'id');
+    }
 }

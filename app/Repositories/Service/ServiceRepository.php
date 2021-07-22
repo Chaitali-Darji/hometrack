@@ -22,6 +22,14 @@ class ServiceRepository
     }
 
     /**
+     * @return Collection
+     */
+    public function paginate()
+    {
+        return $this->model->orderBy('sort')->paginate(config('constants.PAGINATE'));
+    }
+
+    /**
     * @param array $attributes
     * @return Model
     */

@@ -39,7 +39,6 @@
                                 </div>
                             </div>
                             <div class="tab-content">
-                                @include('admin.partials._session-message')
                                 <div class="tab-pane active" id="service" aria-labelledby="service-tab" role="tabpanel">
                                     @include('admin.services.index')
                                 </div>
@@ -60,6 +59,7 @@
 @endsection
 
 @section('page-script')
+    @include('admin.partials._session-message')
     <script src="{{asset('admin/js/scripts/pages/regions/list.js')}}"></script>
     <script src="{{asset('admin/js/scripts/pages/service-types/list.js')}}"></script>
 @endsection

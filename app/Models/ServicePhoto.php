@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Region extends Model
+class ServicePhoto extends Model
 {
     use HasFactory, SoftDeletes;
-
-    const MODULE_NAME = 'Region';
 
     /**
      * The attributes that are mass assignable.
@@ -18,10 +16,8 @@ class Region extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'description',
-        'latitude',
-        'longitude',
+        'service_id',
+        'image_name',
         'is_active'
     ];
 }

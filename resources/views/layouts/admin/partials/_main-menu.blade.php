@@ -30,10 +30,29 @@
                                                                                    href="{{route('clients.index')}}"><i
                             class="bx bx-user"></i><span data-i18n="Clients">Clients</span></a>
             </li>
-            <li class="{{ \Route::is('services.*')  ? 'active' : '' }} nav-item"><a class=" nav-link"
-                                                                                    href="{{route('services.index')}}"><i
-                            class="bx bx-dollar"></i><span data-i18n="Clients">Service Pricing</span></a>
+
+            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#"
+                                                                  data-toggle="dropdown"><i class="bx bx-dollar"></i><span
+                        data-i18n="Service Pricing">Service Pricing</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ \Route::is('services.*')  ? 'active' : '' }}"><a
+                            class="dropdown-item align-items-center" data-toggle="dropdown"
+                            href="{{route('services.index')}}"><i class="bx bx-right-arrow-alt text-hena"></i><span
+                                class="menu-item text-truncate" data-i18n="Services">Services</span></a>
+                    <li class="{{ \Route::is('regions.*')  ? 'active' : '' }}"><a
+                            class="dropdown-item align-items-center" data-toggle="dropdown"
+                            href="{{route('regions.index')}}"><i
+                                class="bx bx-right-arrow-alt text-hena"></i><span class="menu-item text-truncate"
+                                                                                  data-i18n="Regions">Regions</span></a>
+                    <li class="{{ \Route::is('service-types.*')  ? 'active' : '' }}"><a
+                            class="dropdown-item align-items-center" data-toggle="dropdown"
+                            href="{{route('service-types.index')}}"><i
+                                class="bx bx-right-arrow-alt text-hena"></i><span class="menu-item text-truncate"
+                                                                                  data-i18n="Service Types">Service Types</span></a>
+                    </li>
+                </ul>
             </li>
+
             <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#"
                                                                   data-toggle="dropdown"><i class="bx bx-cog"></i><span
                             data-i18n="Settings">Settings</span></a>

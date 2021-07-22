@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -42,7 +42,7 @@ class ServiceTypeController extends BaseController {
      */
     public function create()
     {
-        return view('admin.service-types.add-edit');
+        return view('admin.service-types._add-edit-modal');
     }
 
     /**
@@ -57,10 +57,10 @@ class ServiceTypeController extends BaseController {
             Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.store',['module' => ServiceType::MODULE_NAME]));
         }
         else{
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));
         }
 
-        return Redirect::route('services.index');
+        return Redirect::route('service-types.index');
     }
 
     /**
@@ -73,9 +73,9 @@ class ServiceTypeController extends BaseController {
     {
         if(!$service_type = $this->serviceTypeRepository->find($id)){
             Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => ServiceType::MODULE_NAME]));
-            return redirect()->route('services.index');
+            return redirect()->route('service-types.index');
         }
-        return view('admin.service-types.add-edit', compact('service_type'));
+        return view('admin.service-types._add-edit-modal', compact('service_type'));
     }
 
     /**
@@ -91,9 +91,9 @@ class ServiceTypeController extends BaseController {
             Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => ServiceType::MODULE_NAME]));
         }
         else{
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));
         }
-        return redirect()->route('services.index');
+        return redirect()->route('service-types.index');
     }
 
     /**
@@ -131,5 +131,17 @@ class ServiceTypeController extends BaseController {
             'status' => config('constants.SUCCESS_STATUS'),
             'message' => trans(($serviceType->is_active) ? 'response.disabled' : 'response.enabled',['module' => ServiceType::MODULE_NAME])
         ]);
+    }
+
+    /**
+     * Show the form for get all service types
+     *
+     * @return Response
+     */
+    public function getDropdownList()
+    {
+        $service_types = $this->serviceType->pluck('name','id')->toArray();
+        $service_type = $this->serviceType->latest()->first();
+        return view('admin.service-types._get-dropdown-list',compact('service_types','service_type'));
     }
 }

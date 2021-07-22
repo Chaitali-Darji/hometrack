@@ -5,6 +5,8 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/tables/datatable/responsive.bootstrap4.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/tables/datatable/buttons.bootstrap4.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/forms/select/select2.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/extensions/dragula.min.css')}}">
 <!-- END: Vendor CSS-->
 
 <!-- BEGIN: Theme CSS-->
@@ -22,6 +24,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/pages/dashboard-ecommerce.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/ui/prism.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/file-uploaders/dropzone.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/extensions/drag-and-drop.min.css')}}">
 <!-- END: Page CSS-->
 
 <link rel="stylesheet" href="{{asset('admin/css/toastr.min.css')}}">

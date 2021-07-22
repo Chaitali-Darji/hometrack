@@ -34,11 +34,16 @@
 
     @yield('content')
 
+    <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel33" aria-hidden="true">
+
+    </div>
+
     <!-- BEGIN: Footer-->
       @include('layouts.admin.partials._footer')
     <!-- END: Footer-->
 
-      @include('layouts.admin.partials._footer-script')   
+      @include('layouts.admin.partials._footer-script')
 
     <!-- BEGIN: Page JS-->
       @yield('page-script')

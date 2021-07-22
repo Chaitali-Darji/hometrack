@@ -14,7 +14,6 @@
                                     <h4 class="card-title">Service Type Add/Edit</h4>
                                 </div>
                                 <div class="card-body">
-                                    @include('admin.partials._session-message')
 
                                     @if(isset($service_type))
                                         {!! Form::model($service_type, array('route' => array('service-types.update', $service_type->id),'id' => 'jquery-service_type-form', 'class' => 'jquery-validate-form')) !!}
@@ -53,5 +52,6 @@
 @endsection
 
 @section('page-script')
+    @include('admin.partials._session-message')
     <script src="{{asset('admin/js/scripts/pages/service-types/add-edit.js')}}"></script>
 @endsection

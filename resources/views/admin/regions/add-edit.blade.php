@@ -14,8 +14,6 @@
                                     <h4 class="card-title">Region Add/Edit</h4>
                                 </div>
                                 <div class="card-body">
-                                    @include('admin.partials._session-message')
-
                                     @if(isset($region))
                                         {!! Form::model($region, array('route' => array('regions.update', $region->id),'id' => 'jquery-region-form', 'class' => 'jquery-validate-form')) !!}
                                         {{ method_field('PATCH') }}
@@ -53,5 +51,6 @@
 @endsection
 
 @section('page-script')
+    @include('admin.partials._session-message')
     <script src="{{asset('admin/js/scripts/pages/regions/add-edit.js')}}"></script>
 @endsection

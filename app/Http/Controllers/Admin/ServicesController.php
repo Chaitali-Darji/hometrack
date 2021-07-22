@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Admin\ServiceTypeRequest;
 use App\Models\ServiceType;
 use App\Models\Service;
+use App\Models\ServicePhoto;
 use App\Repositories\ServiceType\ServiceTypeRepository;
 use Carbon\Carbon;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Redirect;
 use Session;
 use App\Models\Region;
@@ -37,18 +39,30 @@ class ServicesController extends BaseController
      * @var ServiceRepository
      */
     private $serviceRepository;
+    /**
+     * @var Service
+     */
+    private $service;
+    /**
+     * @var ServicePhoto
+     */
+    private $servicePhoto;
 
     public function __construct(RegionRepository $regionRepository,
                                 Region $region,
                                 ServiceTypeRepository $serviceTypeRepository,
                                 ServiceType $serviceType,
-                                ServiceRepository $serviceRepository)
+                                ServiceRepository $serviceRepository,
+                                Service $service,
+                                ServicePhoto $servicePhoto)
     {
         $this->serviceTypeRepository = $serviceTypeRepository;
         $this->serviceType = $serviceType;
         $this->regionRepository = $regionRepository;
         $this->region = $region;
         $this->serviceRepository = $serviceRepository;
+        $this->service = $service;
+        $this->servicePhoto = $servicePhoto;
     }
 
     /**
@@ -56,21 +70,14 @@ class ServicesController extends BaseController
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $regions = $this->regionRepository->all();
-        $archive_data = $this->regionRepository->trashAll();
-        $service_types = $this->serviceTypeRepository->all();
-        $service_types_archive_data = $this->serviceTypeRepository->trashAll();
-        $services = $this->serviceRepository->all();
-        $services_archive_data = $this->serviceRepository->trashAll();
-        return view('admin.services.main', compact('regions',
-            'archive_data',
-            'service_types',
-            'service_types_archive_data',
-            'services',
-            'services_archive_data'
-        ));
+        if ($request->ajax()) {
+            $services = $this->serviceRepository->paginate();
+            return view('admin.services.list', compact('services'));
+        }
+        $archive_data = $this->serviceRepository->trashAll();
+        return view('admin.services.index', compact('archive_data'));
     }
 
     /**
@@ -81,7 +88,8 @@ class ServicesController extends BaseController
     public function create()
     {
         $service_types = $this->serviceType->pluck('name','id')->toArray();
-        return view('admin.services.add-edit',compact('service_types'));
+        $regions = $this->region->pluck('name','id')->toArray();
+        return view('admin.services.add-edit',compact('service_types','regions'));
     }
 
     /**
@@ -91,7 +99,26 @@ class ServicesController extends BaseController
      */
     public function store(ServiceRequest $serviceRequest)
     {
-        if ($this->serviceRepository->create($serviceRequest->service+['check_lists'=>json_encode($serviceRequest->check_lists),'region_id' => 1, 'parent_id' => 0])) {
+        if($serviceRequest->display_icon){
+            $imageName = time().Str::random(5).'.'.$serviceRequest->display_icon->extension();
+            $serviceRequest->display_icon->move(config('constants.SERVICE_IMAGE_PATH'), $imageName);
+            $display_icon = $imageName;
+        }
+
+        if ($service = $this->serviceRepository->create($serviceRequest->service+ ['check_lists' => json_encode($serviceRequest->check_lists),
+                'parent_id' => 0,
+                'display_icon' => $display_icon ?? null,
+                'region_id' => implode(',',$serviceRequest->region_id)])) {
+
+            foreach($serviceRequest->photos as $photo){
+                $imageName = time().Str::random(5).'.'.$photo['image_name']->extension();
+                $photo['image_name']->move(config('constants.SERVICE_IMAGE_PATH'), $imageName);
+
+                $service->photos()->create([
+                    'image_name' => $imageName
+                ]);
+            }
+
             Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store', ['module' => Service::MODULE_NAME]));
         } else {
             Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));
@@ -112,7 +139,10 @@ class ServicesController extends BaseController
             return redirect()->route('services.index');
         }
         $service_types = $this->serviceType->pluck('name','id')->toArray();
-        return view('admin.services.add-edit', compact('service','service_types'));
+        $regions = $this->region->pluck('name','id')->toArray();
+        $photos = $this->servicePhoto->where('service_id',$id)->get();
+
+        return view('admin.services.add-edit', compact('service','service_types','regions','photos'));
     }
 
     /**
@@ -124,11 +154,44 @@ class ServicesController extends BaseController
      */
     public function update($id, ServiceRequest $serviceRequest)
     {
-        if($this->serviceRepository->update($id,$serviceRequest->service+['check_lists'=>json_encode($serviceRequest->check_lists),'region_id' => 1, 'parent_id' => 0])){
+        if($serviceRequest->display_icon){
+            $imageName = time().Str::random(5).'.'.$serviceRequest->display_icon->extension();
+            $serviceRequest->display_icon->move(config('constants.SERVICE_IMAGE_PATH'), $imageName);
+            $display_icon = $imageName;
+        }
+
+        if($this->serviceRepository->update($id,$serviceRequest->service+ ['check_lists' => json_encode($serviceRequest->check_lists),
+                'parent_id' => 0,
+                'display_icon' => $display_icon ?? null,
+                'region_id' => implode(',',$serviceRequest->region_id)])){
+
+            $hidden_photos = [];
+
+            if($serviceRequest->photos) {
+                foreach ($serviceRequest->photos as $photo) {
+                    if(isset($photo['image_name_hidden'])){
+                        $hidden_photos[] = $photo['image_name_hidden'];
+                    }
+                }
+
+                $this->servicePhoto->whereNotIn('image_name',$hidden_photos)->delete();
+
+                foreach ($serviceRequest->photos as $photo) {
+
+                    if(isset($photo['image_name'])) {
+                        $imageName = time() . Str::random(5) . '.' . $photo['image_name']->extension();
+                        $photo['image_name']->move(config('constants.SERVICE_IMAGE_PATH'), $imageName);
+                        $this->service->find($id)->photos()->create([
+                            'image_name' => $imageName
+                        ]);
+                    }
+                }
+            }
+
             Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => Service::MODULE_NAME]));
         }
         else{
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));
         }
         return redirect()->route('services.index');
     }
@@ -167,6 +230,17 @@ class ServicesController extends BaseController
         return response()->json([
             'status' => config('constants.SUCCESS_STATUS'),
             'message' => trans(($service->is_active) ? 'response.disabled' : 'response.enabled',['module' => Service::MODULE_NAME])
+        ]);
+    }
+
+    public  function updateOrder(Request $request){
+        foreach ($request->service_order as $key => $order){
+            $this->serviceRepository->update($order, [
+                    'sort' => $key]);
+        }
+        return response()->json([
+            'status' => config('constants.SUCCESS_STATUS'),
+            'message' => trans('response.update',['module' => Service::MODULE_NAME])
         ]);
     }
 }

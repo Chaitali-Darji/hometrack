@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -42,7 +42,7 @@ class RegionController extends BaseController {
      */
     public function create()
     {
-        return view('admin.regions.add-edit');
+        return view('admin.regions._add-edit-modal');
     }
 
     /**
@@ -57,10 +57,10 @@ class RegionController extends BaseController {
             Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.store',['module' => Region::MODULE_NAME]));
         }
         else{
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));
         }
 
-        return Redirect::route('services.index');
+        return Redirect::route('regions.index');
     }
 
     /**
@@ -73,9 +73,9 @@ class RegionController extends BaseController {
     {
         if(!$region = $this->regionRepository->find($id)){
             Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => Region::MODULE_NAME]));
-            return redirect()->route('services.index');
+            return redirect()->route('regions.index');
         }
-        return view('admin.regions.add-edit', compact('region'));
+        return view('admin.regions._add-edit-modal', compact('region'));
     }
 
     /**
@@ -91,9 +91,9 @@ class RegionController extends BaseController {
             Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.update',['module' => Region::MODULE_NAME]));
         }
         else{
-            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));   
+            Session::flash(config('constants.ERROR_STATUS'), trans('response.try_again'));
         }
-        return redirect()->route('services.index');
+        return redirect()->route('regions.index');
     }
 
     /**
@@ -131,5 +131,18 @@ class RegionController extends BaseController {
             'status' => config('constants.SUCCESS_STATUS'),
             'message' => trans(($region->is_active) ? 'response.disabled' : 'response.enabled',['module' => Region::MODULE_NAME])
         ]);
+    }
+
+    /**
+     * Show the form for get all regions
+     *
+     * @return Response
+     */
+    public function getDropdownList()
+    {
+        $regions = $this->region->pluck('name','id')->toArray();
+        $region = $this->region->latest()->first();
+
+        return view('admin.regions._get-dropdown-list',compact('regions','region'));
     }
 }

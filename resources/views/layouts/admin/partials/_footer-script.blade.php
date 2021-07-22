@@ -22,6 +22,8 @@
 <script src="{{asset('admin/vendors/js/file-uploaders/dropzone.min.js')}}"></script>
 <script src="{{asset('admin/vendors/js/ui/prism.min.js')}}"></script>
 <script src="{{asset('admin/vendors/js/forms/repeater/jquery.repeater.min.js')}}"></script>
+<script src="{{asset('admin/vendors/js/extensions/dragula.min.js')}}"></script>
+
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->

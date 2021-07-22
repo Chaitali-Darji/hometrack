@@ -69,12 +69,11 @@ $(document).ready(function () {
         return value == '' || value.trim().length != 0;
     }, "Only space is not allowed");
 
-    $('button[type="submit"]').click(function (e) {
+    $(document).on("click",'button[type="submit"]',function(e){
         $("#validate-form").validate({
             errorPlacement: function (error, element) {
                 error.insertAfter($(element).parent());
             }
-
         });
     });
 

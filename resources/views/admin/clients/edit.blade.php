@@ -44,7 +44,7 @@
                                                     </div>
                                                     @error('primary_account_id')
                                                     <span class="invalid-feedback" role="alert"></span>
-                                                @enderror
+                                                    @enderror
                                                 </div>
                                             </fieldset>
 

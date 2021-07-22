@@ -15,7 +15,7 @@ class CreateServiceTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('region_id');
+            $table->string('region_id')->nullable();
             $table->unsignedBigInteger('parent_id');
             $table->unsignedBigInteger('service_type_id');
             $table->string('name');
@@ -32,7 +32,6 @@ class CreateServiceTable extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('service_type_id')->references('id')->on('service_types')->onDelete('cascade')->onUpdate('cascade');
         });
     }

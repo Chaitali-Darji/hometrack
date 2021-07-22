@@ -184,3 +184,11 @@ iframe .blockbuilder-branding {
 .header-navbar .navbar-container ul.nav li i.ficon:hover {
     color: var(--theme_color) !important;
 }
+
+.draggable .handle{
+    padding: 0 5px;
+    margin-right: 10px;
+    background-color: rgba(0,0,0,.1);
+    cursor: move;
+    font-size: 1.2rem;
+}
