@@ -17,7 +17,7 @@
                       <h4 class="card-title text-hena">Special Pricing Columns</h4>
                   </div>
                     <div class="col-md-6"><a href="{{route('special-pricing-columns.create')}}"
-                                             class="btn round btn-hena pull-right">Add</a></div>
+                                             class="btn round btn-hena pull-right add-special-pricing-column">Add</a></div>
                 </div>
               </div>
             </div>
@@ -51,7 +51,7 @@
                               <tr>
                                 <td class="text-bold-500">{{ $specialPricingColumn->name }}</td>
                                 <td>
-                                    <a href="{{route('special-pricing-columns.edit',$specialPricingColumn->id)}}">
+                                    <a class="edit-special-pricing-column" href="{{route('special-pricing-columns.edit',$specialPricingColumn->id)}}">
                                         <i class="bx bx-edit-alt text-hena mr-1"></i>
                                     </a>
                                     <a href="{{route('special-pricing-columns.destroy',$specialPricingColumn->id)}}" data-specialPricingColumnid="{{$specialPricingColumn->id}}" class="delete-confirm">

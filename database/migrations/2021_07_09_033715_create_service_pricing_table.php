@@ -19,6 +19,7 @@ class CreateServicePricingTable extends Migration
             $table->string('code');
             $table->string('name');
             $table->decimal('price')->nullable();
+            $table->decimal('commission')->default(0);
             $table->boolean('taxable')->default(1);
             $table->boolean('commission_paid')->default(1);
             $table->string('min_sq_ft')->nullable();

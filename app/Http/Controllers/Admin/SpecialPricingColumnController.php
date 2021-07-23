@@ -10,7 +10,7 @@ use App\Models\SpecialPricingColumn;
 use App\Http\Requests\Admin\SpecialPricingColumnRequest;
 use Redirect;
 use Session;
-use App\Repositories\Region\SpecialPricingColumnRepository;
+use App\Repositories\SpecialPricingColumn\SpecialPricingColumnRepository;
 
 class SpecialPricingColumnController extends BaseController {
 
@@ -53,7 +53,7 @@ class SpecialPricingColumnController extends BaseController {
     public function store(SpecialPricingColumnRequest $specialPricingColumnRequest)
     {
 
-        if($this->specialPricingColumnRepository->create($specialPricingColumnRequest->region)){
+        if($this->specialPricingColumnRepository->create($specialPricingColumnRequest->special_pricing_column)){
             Session::flash(config('constants.SUCCESS_STATUS'),  trans('response.store',['module' => SpecialPricingColumn::MODULE_NAME]));
         }
         else{
@@ -71,11 +71,11 @@ class SpecialPricingColumnController extends BaseController {
      */
     public function edit($id)
     {
-        if(!$specialPricing = $this->specialPricingColumnRepository->find($id)){
+        if(!$special_pricing_column = $this->specialPricingColumnRepository->find($id)){
             Session::flash(config('constants.ERROR_STATUS'), trans('response.not_found',['module' => SpecialPricingColumn::MODULE_NAME]));
             return redirect()->route('special-pricing-columns.index');
         }
-        return view('admin.special-pricing-columns._add-edit-modal', compact('specialPricing'));
+        return view('admin.special-pricing-columns._add-edit-modal', compact('special_pricing_column'));
     }
 
     /**

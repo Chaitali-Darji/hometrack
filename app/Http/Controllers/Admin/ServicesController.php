@@ -110,13 +110,15 @@ class ServicesController extends BaseController
                 'display_icon' => $display_icon ?? null,
                 'region_id' => implode(',',$serviceRequest->region_id)])) {
 
-            foreach($serviceRequest->photos as $photo){
-                $imageName = time().Str::random(5).'.'.$photo['image_name']->extension();
-                $photo['image_name']->move(config('constants.SERVICE_IMAGE_PATH'), $imageName);
+            if($serviceRequest->photos) {
+                foreach ($serviceRequest->photos as $photo) {
+                    $imageName = time() . Str::random(5) . '.' . $photo['image_name']->extension();
+                    $photo['image_name']->move(config('constants.SERVICE_IMAGE_PATH'), $imageName);
 
-                $service->photos()->create([
-                    'image_name' => $imageName
-                ]);
+                    $service->photos()->create([
+                        'image_name' => $imageName
+                    ]);
+                }
             }
 
             Session::flash(config('constants.SUCCESS_STATUS'), trans('response.store', ['module' => Service::MODULE_NAME]));

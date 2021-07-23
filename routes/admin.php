@@ -72,4 +72,7 @@ Route::middleware(['auth','roles.auth'])->group(static function () {
     Route::resource('special-pricing-columns', SpecialPricingColumnController::class);
     Route::POST('/special-pricing-columns/active-inactive/{id}', [SpecialPricingColumnController::class, 'activeInactive'])->name('admin.special-pricing-columns.active-inactive');
 
+    //Pricing
+    Route::resource('pricing', \App\Http\Controllers\Admin\PricingController::class);
+    Route::POST('/pricing/active-inactive/{id}', [\App\Http\Controllers\Admin\PricingController::class, 'activeInactive'])->name('admin.pricing.active-inactive');
 });

@@ -39,11 +39,23 @@
                             class="dropdown-item align-items-center" data-toggle="dropdown"
                             href="{{route('services.index')}}"><i class="bx bx-right-arrow-alt text-hena"></i><span
                                 class="menu-item text-truncate" data-i18n="Services">Services</span></a>
+                    </li>
+                    <li class="{{ \Route::is('special-pricing-columns.*')  ? 'active' : '' }}"><a
+                            class="dropdown-item align-items-center" data-toggle="dropdown"
+                            href="{{route('special-pricing-columns.index')}}"><i class="bx bx-right-arrow-alt text-hena"></i><span
+                                class="menu-item text-truncate" data-i18n="special-pricing-columns">Special Pricing Columns</span></a>
+                    </li>
+                    <li class="{{ \Route::is('pricing.*')  ? 'active' : '' }}"><a
+                            class="dropdown-item align-items-center" data-toggle="dropdown"
+                            href="{{route('pricing.index')}}"><i class="bx bx-right-arrow-alt text-hena"></i><span
+                                class="menu-item text-truncate" data-i18n="Pricing">Pricing</span></a>
+                    </li>
                     <li class="{{ \Route::is('regions.*')  ? 'active' : '' }}"><a
                             class="dropdown-item align-items-center" data-toggle="dropdown"
                             href="{{route('regions.index')}}"><i
                                 class="bx bx-right-arrow-alt text-hena"></i><span class="menu-item text-truncate"
                                                                                   data-i18n="Regions">Regions</span></a>
+                    </li>
                     <li class="{{ \Route::is('service-types.*')  ? 'active' : '' }}"><a
                             class="dropdown-item align-items-center" data-toggle="dropdown"
                             href="{{route('service-types.index')}}"><i
