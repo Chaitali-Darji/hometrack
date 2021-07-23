@@ -19,8 +19,7 @@ class DatabaseSeeder extends Seeder
             TemplateSeeder::class,
             UserSeeder::class,
             SMSTemplateSeeder::class,
-            StateSeeder::class,
-            RoleSeeder::class
+            StateSeeder::class
         ]);
     }
 }

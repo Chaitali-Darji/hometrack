@@ -124,6 +124,10 @@ function getRegions(url) {
         url: url,
         success: function (data) {
             $(".dynamic-regions").html(data);
+            $('#parent_filter_select2').select2({
+                placeholder: 'Select Region',
+                dropdownAdapter: $.fn.select2.amd.require('select2/selectAllAdapter')
+            });
         }
     });
 }

@@ -153,7 +153,7 @@
                                         <div class="col-md-6">
                                             {!! Form::label('Service Check Lists', 'Service Check Lists:') !!}
 
-                                            @if(isset($service->check_lists) && empty($service->check_lists))
+                                            @if(!isset($service) || empty($service->check_lists))
                                                 <div class="repeater-default">
                                                     <div data-repeater-list="check_lists">
                                                         <div data-repeater-item>

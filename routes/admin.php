@@ -10,9 +10,10 @@ use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\SMSTemplateController;
 use App\Http\Controllers\Admin\SalesTaxController;
 use App\Http\Controllers\Admin\StateController;
-use App\Http\Controllers\Admin\RegionController;
+use App\Http\Controllers\Admin\SpecialPricingColumnController;
 use App\Http\Controllers\Admin\ServiceTypeController;
 use App\Http\Controllers\Admin\ServicesController;
+use App\Http\Controllers\Admin\RegionController;
 
 Route::middleware(['auth','roles.auth'])->group(static function () {
 
@@ -66,4 +67,9 @@ Route::middleware(['auth','roles.auth'])->group(static function () {
     Route::POST('/services/update-order', [ServicesController::class, 'updateOrder'])->name('admin.services.update-order');
     Route::resource('services', ServicesController::class);
     Route::POST('/services/active-inactive/{id}', [ServicesController::class, 'activeInactive'])->name('admin.services.active-inactive');
+
+    //Special Pricing Column
+    Route::resource('special-pricing-columns', SpecialPricingColumnController::class);
+    Route::POST('/special-pricing-columns/active-inactive/{id}', [SpecialPricingColumnController::class, 'activeInactive'])->name('admin.special-pricing-columns.active-inactive');
+
 });

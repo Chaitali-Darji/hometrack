@@ -21,7 +21,7 @@
                       @if(isset($role))
                             {!! Form::model($role, array('route' => array('roles.update', $role->id),'id' => 'validate-form', 'class' => 'jquery-validate-form')) !!}
                          {{ method_field('PATCH') }}
-                         {!! Form::hidden('id', isset($client) ? $role->id : null) !!}
+                         {!! Form::hidden('id', isset($role) ? $role->id : null) !!}
                       @else
                             {!! Form::open(array('route' => 'roles.store', 'autocomplete' => 'off','id' => 'validate-form', 'class' => 'jquery-validate-form')) !!}
                       @endif
